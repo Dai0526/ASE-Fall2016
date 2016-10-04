@@ -1,9 +1,7 @@
 import os
 import MySQLdb
-
 from flaskext.mysql import MySQL
 from contextlib import closing
-import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, \
 			 abort, render_template, flash
 
@@ -21,6 +19,15 @@ mysql.init_app(app)
 conn=mysql.connect()
 cur=conn.cursor()
 
+def get_db():
+	if not hasattr(g,'mysqldb'):
+		g.mysqldb=mysql.connect()
+	return g.mysqldb
+
+def connect_db():
+	conn=mysql.connect()
+	conn.row_factory=mysql.row
+	return conn
 
 @app.before_request
 def before_request():
@@ -52,7 +59,7 @@ def add_entry():
 		abort(401)
 	ft=request.form['title']
 	sn=request.form['text']
-	print(ft+","+sn)
+#	print(ft+","+sn)
 	cur.execute("INSERT INTO entries (title, text) VALUES (%s,%s);", (ft,sn))
 	print("commit")
 	conn.commit()
