@@ -3,9 +3,10 @@
 
 
 ###Team Member
-Tianhua&nbspFang<br>
-Yunlei&nbsp&nbspQiu<br>
-Ruomeng&nbspZhang<br>
-Yufu&nbsp&nbsp&nbsp&nbspWang<br>
+Tianhua Fang<br>
+Yunlei  Qiu<br>
+Ruomeng Zhang<br>
+Yufu    Wang<br>
 
-###Flasker and hw2 are for ASE assignment 2 pair programming toy system setup.
+###Assignment
+Flasker and hw2 are for ASE assignment 2 pair programming toy system setup.
