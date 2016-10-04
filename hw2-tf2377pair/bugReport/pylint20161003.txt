@@ -1,0 +1,237 @@
+************* Module groupwise
+W: 23, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 24, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 25, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 28, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 29, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 30, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 34, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 35, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 36, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 37, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 38, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 39, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 41, 0: Trailing whitespace (trailing-whitespace)
+W: 43, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 44, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 45, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 46, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 51, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 52, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 53, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 53, 0: No space allowed around keyword argument assignment
+	entries = [dict(title = row[0],text=row[1]) for row in cur.fetchall()]
+                       ^ (bad-whitespace)
+C: 53, 0: Exactly one space required after comma
+	entries = [dict(title = row[0],text=row[1]) for row in cur.fetchall()]
+                               ^ (bad-whitespace)
+W: 54, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 54, 0: No space allowed around keyword argument assignment
+	return render_template('show_entries.html', entries = entries)
+                                                     ^ (bad-whitespace)
+C: 56, 0: No space allowed around keyword argument assignment
+@app.route('/add', methods = ['POST'])
+                           ^ (bad-whitespace)
+W: 58, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 59, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 60, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 60, 0: Exactly one space required around assignment
+	title=request.form['title']
+      ^ (bad-whitespace)
+W: 61, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 61, 0: Exactly one space required around assignment
+	txt=request.form['text']
+    ^ (bad-whitespace)
+W: 63, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 63, 0: Exactly one space required after comma
+	cur.execute("INSERT INTO entries (title, text) VALUES (%s,%s);", (title,txt))
+                                                                        ^ (bad-whitespace)
+W: 64, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 65, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 66, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 68, 0: No space allowed before comma
+@app.route('/login', methods=['GET' , 'POST'])
+                                    ^ (bad-whitespace)
+W: 70, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 70, 0: Exactly one space required around assignment
+	error=None
+      ^ (bad-whitespace)
+W: 71, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 72, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 73, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 74, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 74, 0: Exactly one space required after comma
+		cur.execute('select * from user where userName=(%s)',userName)
+                                                      ^ (bad-whitespace)
+W: 75, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 77, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 78, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 79, 0: Trailing whitespace (trailing-whitespace)
+W: 79, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 80, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 81, 0: Trailing whitespace (trailing-whitespace)
+W: 81, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 82, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 83, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 84, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 85, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 86, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 87, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 89, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C: 89, 0: Exactly one space required after comma
+	return render_template('login.html',error = error)
+                                    ^ (bad-whitespace)
+C: 89, 0: No space allowed around keyword argument assignment
+	return render_template('login.html',error = error)
+                                           ^ (bad-whitespace)
+W: 93, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 94, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 95, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+W: 98, 0: Found indentation with tabs instead of spaces (mixed-indentation)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  9, 0: Invalid constant name "mysql" (invalid-name)
+C: 10, 0: Invalid constant name "app" (invalid-name)
+C: 19, 0: Invalid constant name "conn" (invalid-name)
+C: 20, 0: Invalid constant name "cur" (invalid-name)
+C: 22, 0: Missing function docstring (missing-docstring)
+C: 27, 0: Missing function docstring (missing-docstring)
+E: 29,26: Instance of 'MySQL' has no 'row' member (no-member)
+C: 33, 0: Missing function docstring (missing-docstring)
+W: 36, 1: No exception type(s) specified (bare-except)
+C: 38,20: More than one statement on a single line (multiple-statements)
+C: 42, 0: Missing function docstring (missing-docstring)
+W: 45, 8: Catching too general exception Exception (broad-except)
+C: 45,21: Invalid variable name "e" (invalid-name)
+W: 42,21: Unused argument 'exception' (unused-argument)
+W: 45,21: Unused variable 'e' (unused-variable)
+C: 49, 0: Missing function docstring (missing-docstring)
+C: 57, 0: Missing function docstring (missing-docstring)
+C: 69, 0: Missing function docstring (missing-docstring)
+C: 72, 2: Invalid variable name "userName" (invalid-name)
+C: 73, 2: Invalid variable name "userPass" (invalid-name)
+C: 80, 7: Invalid variable name "pw" (invalid-name)
+C: 92, 0: Missing function docstring (missing-docstring)
+W:  1, 0: Unused import os (unused-import)
+W:  2, 0: Unused import MySQLdb (unused-import)
+W:  3, 0: Unused closing imported from contextlib (unused-import)
+C:  3, 0: standard import "from contextlib import closing" comes before "import MySQLdb" (wrong-import-order)
+
+
+Report
+======
+73 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |1          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|method   |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|function |8      |8          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+External dependencies
+---------------------
+::
+
+    MySQLdb (groupwise)
+    flask (groupwise)
+    flaskext 
+      \-mysql (groupwise)
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |82     |82.83 |83       |-1.00      |
++----------+-------+------+---------+-----------+
+|docstring |0      |0.00  |0        |=          |
++----------+-------+------+---------+-----------+
+|comment   |4      |4.04  |4        |=          |
++----------+-------+------+---------+-----------+
+|empty     |13     |13.13 |13       |=          |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |=          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |34     |54       |-20.00     |
++-----------+-------+---------+-----------+
+|refactor   |0      |0        |=          |
++-----------+-------+---------+-----------+
+|warning    |57     |59       |-2.00      |
++-----------+-------+---------+-----------+
+|error      |1      |1        |=          |
++-----------+-------+---------+-----------+
+
+
+
+Messages
+--------
+
++--------------------+------------+
+|message id          |occurrences |
++====================+============+
+|mixed-indentation   |50          |
++--------------------+------------+
+|bad-whitespace      |12          |
++--------------------+------------+
+|missing-docstring   |9           |
++--------------------+------------+
+|invalid-name        |8           |
++--------------------+------------+
+|unused-import       |3           |
++--------------------+------------+
+|trailing-whitespace |3           |
++--------------------+------------+
+|wrong-import-order  |1           |
++--------------------+------------+
+|unused-variable     |1           |
++--------------------+------------+
+|unused-argument     |1           |
++--------------------+------------+
+|no-member           |1           |
++--------------------+------------+
+|multiple-statements |1           |
++--------------------+------------+
+|broad-except        |1           |
++--------------------+------------+
+|bare-except         |1           |
++--------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at -3.15/10 (previous run: -5.95/10, +2.80)
+
