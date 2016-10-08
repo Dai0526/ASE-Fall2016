@@ -1,9 +1,12 @@
 #Columbia University Fall 2016 ASE Project  
-##"GROUP WISE"   by team "AweSomE"
+##"GROUPWISE"   by team "AweSomE"
 
 
 ###Team Member
-Tianhua Fang
-Yunlei  Qiu
-Ruomeng Zhang
-Yufu    Wang
+Tianhua Fang<br>
+Yunlei  Qiu<br>
+Ruomeng Zhang<br>
+Yufu    Wang<br>
+
+###Assignment
+Flasker and hw2 are for ASE assignment 2 pair programming toy system setup.
