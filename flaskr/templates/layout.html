@@ -7,7 +7,10 @@
   {% if g.user %}
     <a href="{{ url_for('timeline') }}">my timeline</a> |
     <a href="{{ url_for('public_timeline') }}">public timeline</a> |
-    <a href="{{ url_for('logout') }}">sign out [{{ g.user.username }}]</a>
+    <a href="{{ url_for('logout') }}">sign out [{{ g.user.username }}]</a> |
+    <a href="{{ url_for('creategroup') }}">create a group</a> |
+    <a href="{{ url_for('groups') }}">groups</a> |
+
   {% else %}
     <a href="{{ url_for('public_timeline') }}">public timeline</a> |
     <a href="{{ url_for('register') }}">sign up</a> |

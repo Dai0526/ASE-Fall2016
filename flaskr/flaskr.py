@@ -66,6 +66,12 @@ def get_user_id(username):
                   [username], one=True)
     return rv[0] if rv else None
 
+def get_group_id(groupname):
+    """Convenience method to look up the id for a groupname."""
+    rv = query_db('select group_id from `group` where groupname = ?',
+                  [groupname], one=True)
+    return rv[0] if rv else None
+
 
 def format_datetime(timestamp):
     """Format a timestamp for display."""
@@ -116,8 +122,7 @@ def public_timeline():
 @app.route('/<username>')
 def user_timeline(username):
     """Display's a users tweets."""
-    profile_user = query_db('select * from user where username = ?',
-                            [username], one=True)
+    profile_user = query_db('select * from user where username = ?',[username], one=True)
     if profile_user is None:
         abort(404)
     followed = False
@@ -201,7 +206,6 @@ def login():
             return redirect(url_for('timeline'))
     return render_template('login.html', error=error)
 
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     """Registers the user."""
@@ -230,6 +234,39 @@ def register():
             flash('You were successfully registered and can login now')
             return redirect(url_for('login'))
     return render_template('register.html', error=error)
+
+@app.route('/creategroup', methods=['GET', 'POST'])
+def creategroup():
+    """Create a group."""
+    #if not g.user:
+        #return redirect(url_for('timeline'))
+    error = None
+    if request.method == 'POST':
+        if not request.form['groupname']:
+            error = 'You have to enter a groupname'
+        elif not request.form['description']:
+            error = 'You have to enter a valid description'
+
+        elif get_group_id(request.form['groupname']) is not None:
+            error = 'The groupname is already taken'
+        else:
+            db = get_db()
+            db.execute('''insert into `group` (groupname, description) values (?, ?)''',
+                [request.form['groupname'], request.form['description']])
+            db.commit()
+            group_id = get_group_id(request.form['groupname'])
+            db.execute('insert into groupmember (group_id, member_id) values (?, ?)',
+                [group_id, session['user_id']])
+            db.commit()
+            flash('You were successfully create a group')
+            return redirect(url_for('timeline'))
+    return render_template('creategroup.html', error=error)
+
+@app.route('/groups')
+def groups():
+    """Displays the latest all groups."""
+    return render_template('groups.html', groups=query_db('''
+        select * from `group` order by group_id desc limit ?''', [PER_PAGE]))
 
 
 @app.route('/logout')

@@ -19,3 +19,16 @@ create table message (
   text text not null,
   pub_date integer
 );
+
+drop table if exists `group`;
+create table `group` (
+  group_id integer primary key autoincrement,
+  groupname text not null,
+  description text
+);
+
+drop table if exists groupmember;
+create table groupmember (
+  group_id integer,
+  member_id integer
+);
