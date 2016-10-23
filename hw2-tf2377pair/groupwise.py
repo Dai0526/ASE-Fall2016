@@ -38,7 +38,7 @@ def before_request():
 		import traceback; traceback.print_exc()
 		g.conn = None
 
-@app.teardown_appcontext 
+@app.teardown_appcontext
 def teardown_request(exception):
 	try:
 		g.conn.close()
@@ -76,9 +76,9 @@ def login():
 
 		if row is None:
 			error = 'Invalid username'
-		else: 
+		else:
 			for pw in row:
-				print pw 
+				print pw
 				if pw[2] != userPass:
 					error = 'Invalid user password'
 				else:
