@@ -1,4 +1,5 @@
 # all the imports
+import os
 import time
 from sqlite3 import dbapi2 as sqlite3
 from hashlib import md5
@@ -8,7 +9,6 @@ from flask import Flask, request, session, url_for, redirect, \
 from werkzeug import check_password_hash, generate_password_hash
 
 # configuration
-DATABASE = '/home/mona/ASEproject/GWise/ASE-Fall2016/flaskr/groupwise.db'
 PER_PAGE = 30
 DEBUG = True
 SECRET_KEY = 'development key'
@@ -16,6 +16,16 @@ SECRET_KEY = 'development key'
 # create our little application :)
 app = Flask(__name__)
 app.config.from_object(__name__)
+
+# Load default config and override config from an environment variable
+app.config.update(dict(
+    DATABASE=os.path.join(app.root_path, 'flaskr.db'),
+    DEBUG=True,
+    SECRET_KEY='development key',
+    USERNAME='admin',
+    PASSWORD='default'
+))
+app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 def get_db():
     """Opens a new database connection if there is none yet for the
@@ -26,7 +36,15 @@ def get_db():
         top.sqlite_db = sqlite3.connect(app.config['DATABASE'])
         top.sqlite_db.row_factory = sqlite3.Row
     return top.sqlite_db
-
+'''
+def get_db():
+    """Opens a new database connection if there is none yet for the
+    current application context.
+    """
+    if not hasattr(g, 'sqlite_db'):
+        g.sqlite_db = connect_db()
+    return g.sqlite_db
+'''
 def connect_db():
 	"""Connects to the specific database."""
 	rv = sqlite3.connect(app.config['DATABASE'])
