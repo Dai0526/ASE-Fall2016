@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}Create Group{% endblock %}
+{% block body %}
+  <h2>Create Group</h2>
+  {% if error %}<div class="error"><strong>Error:</strong> {{ error }}</div>{% endif %}
+  <form action="" method="post">
+    <dl>
+      <dt>Groupname:
+      <dd><input type="text" name="groupname" size="30" value="{{ request.form.groupname }}">
+      <dt>Description:
+      <dd><input type="text" name="description" size="60" value="{{ request.form.description }}">
+    </dl>
+    <div class="actions"><input type="submit" value="Create Group"></div>
+  </form>
+{% endblock %}

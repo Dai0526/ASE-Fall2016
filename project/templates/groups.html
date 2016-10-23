@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %} Public Groups {% endblock %}
+{% block body %}
+  <h2>{{ self.title() }}</h2>
+
+<ul class="messages">
+  {% for group in groups %}
+    <li><p>
+      <a href="*">{{ group.groupname }}</a><br>
+      {{ group.description }}
+  {% else %}
+    <li><em>There's no group so far.</em>
+  {% endfor %}
+  </ul>
+{% endblock %}
