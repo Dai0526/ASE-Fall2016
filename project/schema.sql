@@ -27,6 +27,14 @@ CREATE TABLE `group` (
   description text
 );
 
+DROP TABLE if exists manages;
+CREATE TABLE manages (
+  group_id integer,
+  manager_id integer,
+  FOREIGN KEY(group_id) REFERENCES 'group'(group_id),
+  FOREIGN KEY(user_id) REFERENCES user(user_id) 
+);
+
 DROP TABLE if exists in;
 CREATE TABLE in(	
   group_id integer,
