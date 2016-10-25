@@ -24,21 +24,21 @@ DROP TABLE if exists `group`;
 CREATE TABLE `group` (
   group_id integer PRIMARY KEY autoincrement,
   groupname text NOT NULL,
-  description text
+  description text 
 );
 
 DROP TABLE if exists manages;
 CREATE TABLE manages (
-  group_id integer,
-  manager_id integer,
+  group_id integer NOT NULL,
+  manager_id integer NOT NULL,
   FOREIGN KEY(group_id) REFERENCES `group`(group_id),
-  FOREIGN KEY(user_id) REFERENCES user(user_id) 
+  FOREIGN KEY(manager_id) REFERENCES user(user_id) 
 );
 
-DROP TABLE if exists in;
-CREATE TABLE in(	
-  group_id integer,
-  member_id integer,
+DROP TABLE if exists `in`;
+CREATE TABLE `in`(	
+  group_id integer NOT NULL,
+  member_id integer NOT NULL,
   FOREIGN KEY(group_id) REFERENCES `group`(group_id),
-  FOREIGN KEY(user_id) REFERENCES user(user_id)
+  FOREIGN KEY(member_id) REFERENCES user(user_id)
 );

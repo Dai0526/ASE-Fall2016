@@ -273,7 +273,12 @@ def creategroup():
                 [request.form['groupname'], request.form['description']])
             db.commit()
             group_id = get_group_id(request.form['groupname'])
-            db.execute('insert into groupmember (group_id, member_id) values (?, ?)',
+            #group creater is the group manager by default
+            db.execute('insert into manages (group_id, manager_id) values (?, ?)',
+                [group_id, session['user_id']])
+            db.commit()
+            #creater is also a team member
+            db.execute('''insert into `in` (group_id, member_id) values (?, ?)''',
                 [group_id, session['user_id']])
             db.commit()
             flash('You were successfully create a group')
@@ -286,6 +291,8 @@ def groups():
     return render_template('groups.html', groups=query_db('''
         select * from `group` order by group_id desc limit ?''', [PER_PAGE]))
 
+#@app.route('/groupinfo')
+#def groupinfo():
 
 @app.route('/logout')
 def logout():
