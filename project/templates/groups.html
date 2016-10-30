@@ -6,7 +6,7 @@
 <ul class="messages">
   {% for group in groups %}
     <li><p>
-      <a href="*">{{ group.groupname }}</a><br>
+      <a href="/info/{{group.groupname}}">{{ group.groupname }}</a><br>
       {{ group.description }}
   {% else %}
     <li><em>There's no group so far.</em>
