@@ -8,6 +8,8 @@ from flask import Flask, request, session, url_for, redirect, \
      render_template, abort, g, flash, _app_ctx_stack
 from werkzeug import check_password_hash, generate_password_hash
 
+import logging
+logging.basicConfig(level=logging.INFO)
 # configuration
 PER_PAGE = 30
 DEBUG = True
@@ -291,13 +293,96 @@ def groups():
     return render_template('groups.html', groups=query_db('''
         select * from `group` order by group_id desc limit ?''', [PER_PAGE]))
 
-#@app.route('/groupinfo')
-#def groupinfo():
+
 @app.route('/my_group')
 def my_group():
     """Displays the latest all groups."""
     return render_template('my_group.html', mygroups=query_db('''
         select g.groupname, g.description from `group` g,user u, `in` i where i.group_id=g.group_id AND i.member_id=u.user_id AND u.user_id=? order by g.group_id desc limit ?''', [session['user_id'], PER_PAGE]))
+
+@app.route('/gourps/<groupname>')
+def group_info(groupname):
+    """Display members of groups."""
+    profile_group = query_db('select * from `group` where groupname = ?',[groupname], one=True)
+    if profile_group is None:
+        abort(404)
+    group_id = get_group_id(groupname)
+    db = get_db()
+    group_members = query_db('select i.member_id from `in` i where i.group_id=?', [group_id])
+    db.commit()
+    group_members = [i[0] for i in group_members]
+    return render_template('groups.html', groupmembers=query_db('select * from user where user_id in ('
+        + ', '.join('?'*len(group_members)) +') order by user_id desc limit 30',group_members), profile_group=profile_group)
+
+
+@app.route('/groups/<groupname>/add_member', methods=['POST'])
+def add_member(groupname):
+    """Registers a new member for the group."""
+    if 'user_id' not in session:
+        abort(401)
+    user_id = get_user_id(request.form['username'])
+    if user_id is None:
+        flash('Invalid username')
+    else:
+        group_id = get_group_id(groupname)
+        db = get_db()
+        ex = query_db('select * from `in` where group_id = ? and member_id = ?',
+            [group_id, user_id], one = True)
+        db.commit()
+        print ex
+        if ex is not None:
+            flash('User was in that group')
+        else:
+            db = get_db()
+            db.execute('insert into `in` (group_id, member_id) values (?, ?)',
+                [group_id, user_id])
+            db.commit()
+            flash('The member was added')
+    return redirect(url_for('group_info', groupname=groupname))
+
+
+@app.route('/my_gourp/<groupname>')
+def my_group_info(groupname):
+    """Display members of groups."""
+    profile_group = query_db('select * from `group` where groupname = ?',[groupname], one=True)
+    if profile_group is None:
+        abort(404)
+    group_id = get_group_id(groupname)
+    db = get_db()
+    group_members = query_db('select i.member_id from `in` i where i.group_id=?', [group_id])
+    db.commit()
+    group_members = [i[0] for i in group_members]
+    return render_template('my_group.html', groupmembers=query_db('select * from user where user_id in ('
+        + ', '.join('?'*len(group_members)) +') order by user_id desc limit 30',group_members), profile_group=profile_group)
+
+
+@app.route('/my_group/<groupname>/add_member', methods=['POST'])
+def my_add_member(groupname):
+    """Registers a new member for the group."""
+    if 'user_id' not in session:
+        abort(401)
+    user_id = get_user_id(request.form['username'])
+    if user_id is None:
+        flash('Invalid username')
+    else:
+        group_id = get_group_id(groupname)
+        db = get_db()
+        ex = query_db('select * from `in` where group_id = ? and member_id = ?',
+            [group_id, user_id], one = True)
+        db.commit()
+        print ex
+        if ex is not None:
+            flash('User was in that group')
+        else:
+            db = get_db()
+            db.execute('insert into `in` (group_id, member_id) values (?, ?)',
+                [group_id, user_id])
+            db.commit()
+            flash('The member was added')
+    return redirect(url_for('my_group_info', groupname=groupname))
+
+
+
 
 @app.route('/logout')
 def logout():
