@@ -293,6 +293,11 @@ def groups():
 
 #@app.route('/groupinfo')
 #def groupinfo():
+@app.route('/my_group')
+def my_group():
+    """Displays the latest all groups."""
+    return render_template('my_group.html', mygroups=query_db('''
+        select g.groupname, g.description from `group` g,user u, `in` i where i.group_id=g.group_id AND i.member_id=u.user_id AND u.user_id=? order by g.group_id desc limit ?''', [session['user_id'], PER_PAGE]))
 
 @app.route('/logout')
 def logout():
