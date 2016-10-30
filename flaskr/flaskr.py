@@ -8,6 +8,9 @@ from flask import Flask, request, session, url_for, redirect, \
      render_template, abort, g, flash, _app_ctx_stack
 from werkzeug import check_password_hash, generate_password_hash
 
+import logging
+logging.basicConfig(level=logging.INFO)
+
 # configuration
 PER_PAGE = 30
 DEBUG = True
@@ -16,6 +19,7 @@ SECRET_KEY = 'development key'
 # create our little application :)
 app = Flask(__name__)
 app.config.from_object(__name__)
+#app.config['DEBUG'] = True
 
 # Load default config and override config from an environment variable
 app.config.update(dict(
@@ -80,8 +84,7 @@ def query_db(query, args=(), one=False):
 
 def get_user_id(username):
     """Convenience method to look up the id for a username."""
-    rv = query_db('select user_id from user where username = ?',
-                  [username], one=True)
+    rv = query_db('select user_id from user where username = ?', [username], one=True)
     return rv[0] if rv else None
 
 def get_group_id(groupname):
@@ -215,8 +218,7 @@ def login():
             username = ?''', [request.form['username']], one=True)
         if user is None:
             error = 'Invalid username'
-        elif not check_password_hash(user['pw_hash'],
-                                     request.form['password']):
+        elif not check_password_hash(user['pw_hash'], request.form['password']):
             error = 'Invalid password'
         else:
             flash('You were logged in')
@@ -285,6 +287,46 @@ def groups():
     """Displays the latest all groups."""
     return render_template('groups.html', groups=query_db('''
         select * from `group` order by group_id desc limit ?''', [PER_PAGE]))
+
+@app.route('/groups/<groupname>')
+def show_members(groupname):
+    """Display members of groups."""
+    profile_group = query_db('select * from `group` where groupname = ?',[groupname], one=True)
+    if profile_group is None:
+        abort(404)
+    group_id = get_group_id(groupname)
+    db = get_db()
+    group_members = query_db('select member_id from groupmember where group_id=?', [group_id])
+    db.commit()
+    group_members = [i[0] for i in group_members]
+    return render_template('groups.html', groupmembers=query_db('select * from user where user_id in ('
+        + ', '.join('?'*len(group_members)) +') order by user_id desc limit 30',group_members), profile_group=profile_group)
+
+@app.route('/groups/<groupname>/add_member', methods=['POST'])
+def add_member(groupname):
+    """Registers a new member for the group."""
+    if 'user_id' not in session:
+        abort(401)
+    user_id = get_user_id(request.form['username'])
+    if user_id is None:
+        flash('Invalid username')
+    else:
+        group_id = get_group_id(groupname)
+        db = get_db()
+        ex = query_db('select * from groupmember where group_id = ? and member_id = ?',
+            [group_id, user_id], one = True)
+        db.commit()
+        print ex
+        if ex is not None:
+            flash('User was in that group')
+        else:
+            db = get_db()
+            db.execute('insert into groupmember (group_id, member_id) values (?, ?)',
+                [group_id, user_id])
+            db.commit()
+            flash('The member was added')
+    return redirect(url_for('show_members', groupname=groupname))
+
 
 
 @app.route('/logout')
