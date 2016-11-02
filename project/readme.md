@@ -11,12 +11,11 @@ post message
 create group
 add group member
 ```
-Use
+To start the app, use:
 ```
 fab run
 ```
-to start the app, and use
+To test the app, use:
 ```
 fab test
 ```
-to test.
