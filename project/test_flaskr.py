@@ -1,7 +1,7 @@
 import os
 import tempfile
 import unittest
-import pytest
+#import pytest
 import flaskr
 
 class FlaskrTestCase(unittest.TestCase):
@@ -21,24 +21,38 @@ class FlaskrTestCase(unittest.TestCase):
         assert b'No entries here so far' in rv.data
 
     def login(self, username, password):
-        return self.app.post( '/login' , data=dict(
-            username=username,
-            password=password
-        ), follow_redirects=True)
+        return self.app.post('/login', data=dict(username=username, password=password), follow_redirects=True)
+
+    def register(self, username, email, password1, password2):
+        return self.app.post('/register', data=dict(username=username, email=email, password1=password1, password2=password2), follow_redirects=True)
+
+    def test_login(self):
+        self.register('myname', 'myemail', 'mypassword', 'mypassword')
+        rv = self.login('','mypassword')
+        assert 'Invalid username' in rv.data
+        rv = self.login('myname', 'mypassword')
+        assert 'Invalid password' in rv.data
+        rv = self.login('myname',None)
+        assert 'Invalid password' in rv.data
 
     def logout(self):
         return self.app.get( '/logout' , follow_redirects=True)
 
-    def test_login_logout(self):
-        rv = self.login('admin','123456')
-        assert 'You were logged in' in rv.data
-        rv = self.login('rz','123456')
-        assert 'Invalid username' in rv.data
-        rv = self.login('admin','111111')
-        assert 'Invalid password' in rv.data
+    def test_register(self):
+        rv = self.register('','abc@gmail.com','mypassword','mypassword')
+        assert 'You have to enter a username' in rv.data
+        rv = self.register('myname', 'abc', 'mypassword', 'mypassword')
+        assert 'You have to enter a valid email address' in rv.data
+        rv = self.register('myname', '', 'mypassword','mypassword')
+        assert 'You have to enter a valid email address' in rv.data
+        rv = self.register('myname', 'abc@gmail.com', None,None)
+        assert 'You have to enter a password' in rv.data
+        rv = self.register('myname','abc@gmail.com', 'abc','acb')
+        assert 'The two passwords do not match' in rv.data
+
+    def test_logout(self):
         rv = self.logout()
         assert 'You were logged out' in rv.data
-
     def test_message(self):
         self.login('admin','123456')
         rv = self.app.post('/add', data=dict(
