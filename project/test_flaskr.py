@@ -16,7 +16,7 @@ class FlaskrTestCase(unittest.TestCase):
         os.close(self.db_fd)
         os.unlink(flaskr.app.config['DATABASE'])
 
-    def test_empty_db(self):
+    def test_empty_db(self):       ##这个需要吗？？没有这个assertion。。
         rv = self.app.get('/')
         assert b'No entries here so far' in rv.data
 
@@ -27,7 +27,7 @@ class FlaskrTestCase(unittest.TestCase):
         return self.app.post('/register', data=dict(username=username, email=email, password1=password1, password2=password2), follow_redirects=True)
 
     def test_login(self):
-        self.register('myname', 'myemail', 'mypassword', 'mypassword')
+        self.register('myname', 'myemail', 'mypassword', 'mypassword')   #？
         rv = self.login('','mypassword')
         assert 'Invalid username' in rv.data
         rv = self.login('myname', 'mypassword')
