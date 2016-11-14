@@ -17,7 +17,16 @@
         This is you!
       {% else %}
         This is {{profile_user.username}}.
-
+      {# disabled template because we no longer use this
+      {% elif followed %}
+        You are currently following this user.
+        <a class="unfollow" href="{{ url_for('unfollow_user', username=profile_user.username)
+          }}">Unfollow user</a>.
+      {% else %}
+        You are not yet following this user.
+        <a class="follow" href="{{ url_for('follow_user', username=profile_user.username)
+          }}">Follow user</a>-->
+        #}
       {% endif %}
       </div>
     {% elif request.endpoint == 'timeline' %}
