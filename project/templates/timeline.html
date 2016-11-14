@@ -15,14 +15,9 @@
       <div class="followstatus">
       {% if g.user.user_id == profile_user.user_id %}
         This is you!
-      {% elif followed %}
-        You are currently following this user.
-        <a class="unfollow" href="{{ url_for('unfollow_user', username=profile_user.username)
-          }}">Unfollow user</a>.
       {% else %}
-        You are not yet following this user.
-        <a class="follow" href="{{ url_for('follow_user', username=profile_user.username)
-          }}">Follow user</a>.
+        This is {{profile_user.username}}.
+
       {% endif %}
       </div>
     {% elif request.endpoint == 'timeline' %}
