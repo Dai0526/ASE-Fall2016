@@ -91,5 +91,24 @@ class FlaskrTestCase(unittest.TestCase):
 		rv = self.app.post('/groups/groupname1/add_member', data=dict(username='myname3'), follow_redirects=True)
 		assert 'Invalid username' in rv.data
 
+    def test_cache(self):
+        self.register('myname', 'my@email', 'mypassword', 'mypassword')
+        self.login('myname','mypassword')
+        self.logout()
+        # In add message
+        rv = self.app.post('/add_message', data=dict(
+        text='Hello World!'
+        ), follow_redirects=True)
+        assert 'please login first' in rv.data
+        # In create group
+        rv = self.app.post('/creategroup', data=dict(
+        groupname='groupname1',
+        description='This is a description'
+        ), follow_redirects=True)
+        assert 'please login first' in rv.data
+
+        rv = self.app.get( '/groups' , follow_redirects=True)
+        assert 'please login first' in rv.data
+
 if __name__ == '__main__':
     unittest.main()
