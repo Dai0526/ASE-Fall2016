@@ -29,6 +29,54 @@ app.config.update(dict(
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
+#user class
+class user(object):
+    def __init__(self,un,pd,em):
+        self.username=un
+        self.pd=password
+        self.em=em
+
+    def get_userid(self,un):
+        rv = query_db('select user_id from user where username = ?',
+            [un], one=True)
+        return rv[0] if rv else None
+
+    def get_username(self):
+        return self.username
+    def get_password(self):
+        return self.username
+    def get_email(self):
+        return self.email
+    def set_username(self,un):
+        self.username=un
+    def set_password(self,pw):
+        self.email=pw
+    def set_email(self,em):
+        self.email=em
+
+#group class
+class group(object):
+    def __init__(self,gn,gd):
+        self.groupname=gn
+        self.gd=description
+
+    def get_groupid(self,gn):
+        rv = query_db('select group_id from group where groupname = ?',
+            [gn], one=True)
+        return rv[0] if rv else None
+
+    def get_groupname(self):
+        return self.groupname
+    def get_description(self):
+        return self.description
+
+    def set_groupname(self,gn):
+        self.username=gn
+    def set_description(self,gd):
+        self.email=gd
+
+
+
 def get_db():
     """Opens a new database connection if there is none yet for the
     current application context.
