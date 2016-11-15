@@ -64,40 +64,32 @@ class FlaskrTestCase(unittest.TestCase):
         assert 'No entries here so far' not in rv.data
         assert 'Hello World!' in rv.data
 
-    def test_creategroup(self):
-    	self.register('myname', 'my@email', 'mypassword', 'mypassword')
-    	self.register('myname2', 'my2@email', 'mypassword2', 'mypassword2')
-    	rv = self.login('myname','mypassword')
-    	rv = self.app.post('/creategroup', data=dict(
-        groupname='groupname1',
-        description='This is a description'
-        ), follow_redirects=True)
+    def test_group(self):
+		#login and create group
+		self.register('myname', 'my@email', 'mypassword', 'mypassword')
+		self.register('myname2', 'my2@email', 'mypassword2', 'mypassword2')
+		rv = self.login('myname','mypassword')
+		rv = self.app.post('/creategroup', data=dict(groupname='groupname1',description='This is a description'), follow_redirects=True)
+		assert 'You were successfully create a group' in rv.data
+		
+		#crete a group with the same groupname
+		rv = self.app.post('/creategroup', data=dict(groupname='groupname1',description='This is a description'), follow_redirects=True)
+		assert 'The groupname is already taken' in rv.data
 
-    	assert 'You were successfully create a group' in rv.data
+		#add member succee
+		self.app.get( '/groups/groupname1' , follow_redirects=True)
+		rv = self.app.post('/groups/groupname1/add_member', data=dict(username='myname2'), follow_redirects=True)
+		assert 'The member was added' in rv.data
 
-    	rv = self.app.post('/creategroup', data=dict(
-        groupname='groupname1',
-        description='This is a description'
-        ), follow_redirects=True)
-        assert 'The groupname is already taken' in rv.data
+		#add member that already in
+		self.app.get( '/groups/groupname1' , follow_redirects=True)
+		rv = self.app.post('/groups/groupname1/add_member', data=dict(username='myname2'), follow_redirects=True)
+		assert 'User was in that group' in rv.data
 
-        self.app.get( '/groups/groupname1' , follow_redirects=True)
-        rv = self.app.post('/groups/groupname1/add_member', data=dict(
-        username='myname2'
-        ), follow_redirects=True)
-        assert 'The member was added' in rv.data
-
-        self.app.get( '/groups/groupname1' , follow_redirects=True)
-        rv = self.app.post('/groups/groupname1/add_member', data=dict(
-        username='myname2'
-        ), follow_redirects=True)
-        assert 'User was in that group' in rv.data
-
-        self.app.get( '/groups/groupname1' , follow_redirects=True)
-        rv = self.app.post('/groups/groupname1/add_member', data=dict(
-        username='myname3'
-        ), follow_redirects=True)
-        assert 'Invalid username' in rv.data
+		#add unregistered user
+		self.app.get( '/groups/groupname1' , follow_redirects=True)
+		rv = self.app.post('/groups/groupname1/add_member', data=dict(username='myname3'), follow_redirects=True)
+		assert 'Invalid username' in rv.data
 
 if __name__ == '__main__':
     unittest.main()
