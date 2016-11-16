@@ -73,7 +73,7 @@ class group(object):
     def set_groupname(self,gn):
         self.username=gn
     def set_description(self,gd):
-        self.email=gd
+        self.gd=gd
 
 
 
@@ -260,7 +260,7 @@ def unfollow_user(username):
 @app.route('/add_message', methods=['POST'])
 def add_message():
     if 'user_id' not in session:
-        return  render_template('/login.html', error="please login first") 
+        return  render_template('/login.html', error="please login first")
     """Registers a new message for the user."""
     if 'user_id' not in session:
         abort(401)
@@ -326,7 +326,7 @@ def register():
 @app.route('/creategroup', methods=['GET', 'POST'])
 def creategroup():
     if 'user_id' not in session:
-        return  render_template('/login.html', error="please login first") 
+        return  render_template('/login.html', error="please login first")
     """Create a group."""
     #if not g.user:
         #return redirect(url_for('timeline'))
@@ -360,7 +360,7 @@ def creategroup():
 @app.route('/groups')
 def groups():
     if 'user_id' not in session:
-        return  render_template('/login.html', error="please login first") 
+        return  render_template('/login.html', error="please login first")
     """Displays the latest all groups."""
     return render_template('groups.html', groups=query_db('''
         select * from `group` order by group_id desc limit ?''', [PER_PAGE]))
@@ -370,14 +370,14 @@ def groups():
 def my_group():
     """Displays the latest all groups."""
     if 'user_id' not in session:
-        return  render_template('/login.html', error="please login first") 
+        return  render_template('/login.html', error="please login first")
     return render_template('my_group.html', mygroups=query_db('''
         select g.groupname, g.description from `group` g,user u, `in` i where i.group_id=g.group_id AND i.member_id=u.user_id AND u.user_id=? order by g.group_id desc limit ?''', [session['user_id'], PER_PAGE]))
 
-@app.route('/gourps/<groupname>')
+@app.route('/groups/<groupname>')
 def group_info(groupname):
     if 'user_id' not in session:
-        return  render_template('/login.html', error="please login first") 
+        return  render_template('/login.html', error="please login first")
     """Display members of groups."""
     profile_group = query_db('select * from `group` where groupname = ?',[groupname], one=True)
     if profile_group is None:
@@ -394,7 +394,7 @@ def group_info(groupname):
 @app.route('/groups/<groupname>/add_member', methods=['POST'])
 def add_member(groupname):
     if 'user_id' not in session:
-        return  render_template('/login.html', error="please login first") 
+        return  render_template('/login.html', error="please login first")
     """Registers a new member for the group."""
     if 'user_id' not in session:
         abort(401)
@@ -422,7 +422,7 @@ def add_member(groupname):
 @app.route('/my_gourp/<groupname>')
 def my_group_info(groupname):
     if 'user_id' not in session:
-        return  render_template('/login.html', error="please login first") 
+        return  render_template('/login.html', error="please login first")
     """Display members of groups."""
     profile_group = query_db('select * from `group` where groupname = ?',[groupname], one=True)
     if profile_group is None:
@@ -439,7 +439,7 @@ def my_group_info(groupname):
 @app.route('/my_group/<groupname>/add_member', methods=['POST'])
 def my_add_member(groupname):
     if 'user_id' not in session:
-        return  render_template('/login.html', error="please login first") 
+        return  render_template('/login.html', error="please login first")
     """Registers a new member for the group."""
     if 'user_id' not in session:
         abort(401)
