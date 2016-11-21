@@ -7,6 +7,7 @@ from datetime import datetime
 from flask import Flask, request, session, url_for, redirect, \
      render_template, abort, g, flash, _app_ctx_stack, Response
 from werkzeug import check_password_hash, generate_password_hash
+from functools import wraps
 
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -75,7 +76,15 @@ class group(object):
     def set_description(self,gd):
         self.gd=gd
 
-
+def login_required(test):
+    @wraps(test)
+    def wrap(*args, **kwargs):
+        if 'user_id' in session:
+            return test(*args, **kwargs)
+        else:
+            flash('You need to login first.')
+            return redirect(url_for('login'))
+    return wrap
 
 def get_db():
     """Opens a new database connection if there is none yet for the
@@ -324,9 +333,10 @@ def register():
     return render_template('register.html', error=error)
 
 @app.route('/creategroup', methods=['GET', 'POST'])
+@login_required
 def creategroup():
-    if 'user_id' not in session:
-        return  render_template('/login.html', error="please login first")
+    # if 'user_id' not in session:
+    #     return  render_template('/login.html', error="please login first")
     """Create a group."""
     #if not g.user:
         #return redirect(url_for('timeline'))
