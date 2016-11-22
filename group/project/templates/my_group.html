@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block title %}
+	{% if request.endpoint == 'my_group' %}
+		My Groups 
+	{% elif request.endpoint == 'my_group_info' %}
+		{{ profile_group.groupname }}'s members
+	{% else %}
+		Group Members
+	{% endif %}
+{% endblock %}
+{% block body %}
+  <h2>{{ self.title() }}</h2>
+  {% if request.endpoint == 'my_group' %}
+  <ul class="messages">
+  {% for group in mygroups %}
+    <li><p>
+      <a href="{{ url_for('group_info', groupname=group.groupname)
+      }}">{{ group.groupname }}</a><br>
+      {{ group.description }}
+  {% else %}
+    <li><em>I don't have group so far.</em>
+  {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if request.endpoint == 'my_group_info' %}
+  <h2> Add Member </h2>
+  	<div class="twitbox">
+      <h3>Who do you want to add into {{ profile_group.groupname }}?</h3>
+      <form action="{{ url_for('add_member', groupname=profile_group.groupname) }}" method="post">
+        <p><input type="text" name="username" size="30">
+        <input type="submit" value="Add">
+      </form>
+    </div>
+    <ul class="messages">
+  {% for groupmember in groupmembers %}
+    <li><p>
+      <a href="{{ url_for('user_timeline', username=groupmember.username)}}">
+      {{ groupmember.username }}</a><br>
+      {{ groupmember.email }}
+  {% else %}
+    <li><em>There's no member so far.</em>
+  {% endfor %}
+  </ul>
+  {% endif %}	
+{% endblock %}

@@ -1,0 +1,37 @@
+<!doctype html>
+<title>{% block title %}Welcome{% endblock %} | GroupWise</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<div class="page">
+  <h1>GroupWise</h1>
+  <div class="navigation">
+  {% if g.user %}
+    <a href="{{ url_for('home.timeline') }}">my timeline</a> |
+    <a href="{{ url_for('home.public_timeline') }}">public timeline</a> |
+    <a href="{{ url_for('users.logout') }}">sign out [{{ g.user.username }}]</a> |
+    {#
+    <a href="{{ url_for('creategroup') }}">create a group</a> |
+    <a href="{{ url_for('groups') }}">groups</a> |
+    <a href="{{ url_for('my_group') }}">my group</a>
+    #}
+  {% else %}
+    <a href="{{ url_for('home.public_timeline') }}">public timeline</a> |
+    <a href="{{ url_for('users.register') }}">sign up</a> |
+    <a href="{{ url_for('users.login') }}">sign in</a>
+  {% endif %}
+  </div>
+  {% with flashes = get_flashed_messages() %}
+    {% if flashes %}
+      <ul class="flashes">
+      {% for message in flashes %}
+        <li>{{ message }}
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <div class="body">
+  {% block body %}{% endblock %}
+  </div>
+  <div class="footer">
+    GroupWise
+  </div>
+</div>
