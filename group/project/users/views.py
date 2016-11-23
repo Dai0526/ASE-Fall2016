@@ -24,7 +24,7 @@ def login_required(f):
             return f(*args, **kwargs)
         else:
             flash('You need to login first.')
-            return redirect(url_for('login'))
+            return redirect(url_for('users.login'))
     return wrap
 
 @users_blueprint.before_request
@@ -40,7 +40,7 @@ def login():
         return redirect(url_for('home.timeline'))
     error = None
     if request.method == 'POST':
-        user = User.query.filter_by(username=request.form['username']).first()
+        user = db.session.query(User).filter_by(username=request.form['username']).first()
         if user is None:
             error = 'Invalid username'
         elif not check_password_hash(user.pw_hash, request.form['password']):
@@ -75,7 +75,7 @@ def register():
             error = 'You have to enter a password'
         elif request.form['password'] != request.form['password2']:
             error = 'The two passwords do not match'
-        elif User.query.filter_by(username=request.form['username']).first() is not None:
+        elif db.session.query(User).filter_by(username=request.form['username']).first() is not None:
             error = 'The username is already taken'
         else:
             user = User(request.form['username'], request.form['email'], generate_password_hash(request.form['password']))

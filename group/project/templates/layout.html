@@ -8,11 +8,9 @@
     <a href="{{ url_for('home.timeline') }}">my timeline</a> |
     <a href="{{ url_for('home.public_timeline') }}">public timeline</a> |
     <a href="{{ url_for('users.logout') }}">sign out [{{ g.user.username }}]</a> |
-    {#
-    <a href="{{ url_for('creategroup') }}">create a group</a> |
-    <a href="{{ url_for('groups') }}">groups</a> |
-    <a href="{{ url_for('my_group') }}">my group</a>
-    #}
+    <a href="{{ url_for('groups.creategroup') }}">create a group</a> |
+    <a href="{{ url_for('groups.groups') }}">groups</a> |
+    <a href="{{ url_for('groups.my_group') }}">my group</a>
   {% else %}
     <a href="{{ url_for('home.public_timeline') }}">public timeline</a> |
     <a href="{{ url_for('users.register') }}">sign up</a> |

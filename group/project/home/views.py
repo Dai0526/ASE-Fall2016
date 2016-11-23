@@ -48,7 +48,6 @@ def timeline():
 def public_timeline():
     """Displays the latest messages of all users."""
     messages = db.session.query(Message).order_by(Message.pub_date.desc()).limit(30).all()
-    print messages
     return render_template('timeline.html', messages=messages)
 
 

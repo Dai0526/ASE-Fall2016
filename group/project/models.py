@@ -14,7 +14,6 @@ class Message(db.Model):
     author_id = db.Column(db.Integer, ForeignKey('user.id'))
     pub_date = db.Column(db.DateTime)
 
-
     def __init__(self, description, author_id, pub_date=None):
         self.description = description
         self.author_id = author_id
@@ -39,7 +38,7 @@ class User(db.Model):
     username = db.Column(db.String, nullable=False, unique=True)
     email = db.Column(db.String, nullable=False)
     pw_hash = db.Column(db.String)
-    posts = relationship("Message", backref="author")
+    posts = db.relationship("Message", backref="author", lazy="dynamic")
 
     def __init__(self, username, email, pw_hash):
         self.username = username
@@ -70,8 +69,8 @@ class Group(db.Model):
     description = db.Column(db.Text, nullable=False)
     fud_date = db.Column(db.DateTime)
 
-    members = db.relationship('User', secondary=memberships,
-        backref=db.backref('groups'))
+    members = db.relationship("User", secondary=memberships,
+        backref=db.backref("groups", lazy="dynamic"))
 
     def __init__(self, groupname, description, fud_date=None):
         self.groupname = groupname
