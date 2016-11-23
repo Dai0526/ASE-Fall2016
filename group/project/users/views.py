@@ -52,7 +52,6 @@ def login():
     return render_template('login.html', error=error)
 
 @users_blueprint.route('/logout')
-@login_required
 def logout():
     """Logs the user out."""
     flash('You were logged out')
