@@ -1,8 +1,6 @@
-import os
 # default config
 class BaseConfig(object):
     """BasicConfig of the app"""
-    #DATABASE=os.path.join(os.path.dirname(__file__), 'groupwise.db')
     DEBUG=False
     SECRET_KEY='development key'
     USERNAME='admin'
@@ -12,7 +10,7 @@ class TestConfig(BaseConfig):
     DEBUG = True
     TESTING = True
     WTF_CSRF_ENABLED = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/test.db'
 
 class DevelopmentConfig(BaseConfig):
     DEBUG=True
