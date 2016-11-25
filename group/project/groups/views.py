@@ -104,6 +104,7 @@ def group_info(groupname):
     if profile_group is None:
         abort(404)
     return render_template('groups.html',
+     groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).order_by(Event.pub_date.desc()).all(),
      groupmembers=db.session.query(User).filter(User.groups.any(groupname=groupname)).all(),
      profile_group=profile_group)
 
@@ -129,6 +130,36 @@ def add_member(groupname):
             flash('The member was added')
     return redirect(url_for('groups.group_info', groupname=groupname))
 
+@groups_blueprint.route('/groups/<groupname>/add_event', methods=['POST'])
+@login_required
+def add_event(groupname):
+    group = db.session.query(Group).filter_by(groupname=groupname).first()
+    user = db.session.query(User).filter_by(id=session['user_id']).first()
+    if user not in group.members:
+        flash('You are not in that group')
+    else:
+        new_event = Event(request.form['title'],request.form['text'], user.id, group.id)
+        db.session.add(new_event)
+        db.session.commit()
+        flash('New event was added')
+    return redirect(url_for('groups.group_info', groupname=groupname))
+
+@groups_blueprint.route('/groups/<groupname>/download', methods=['GET'])
+@login_required
+def download(groupname):
+    profile_group = db.session.query(Group).filter_by(groupname=groupname).first()
+    if profile_group is None:
+        abort(404)
+    groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).all()
+    csv = 'title,description,author,date\n'
+    for event in groupevents:
+        csv += event.title + ',' + event.description + ',' + event.author.username + ',' + str(event.pub_date) + '\n'
+    return Response(
+        csv,
+        mimetype="text/csv",
+        headers={"Content-disposition":
+                 "attachment; filename=myplot.csv"})
+    return redirect(url_for('groups.group_info', groupname=groupname))
 
 # @groups_blueprint.route('/my_gourp/<groupname>')
 # @login_required

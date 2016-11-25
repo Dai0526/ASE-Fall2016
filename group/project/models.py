@@ -38,7 +38,9 @@ class User(db.Model):
     username = db.Column(db.String, nullable=False, unique=True)
     email = db.Column(db.String, nullable=False)
     pw_hash = db.Column(db.String)
+
     posts = db.relationship("Message", backref="author", lazy="dynamic")
+    events = db.relationship("Event", backref="author", lazy="dynamic")
 
     def __init__(self, username, email, pw_hash):
         self.username = username
@@ -71,6 +73,7 @@ class Group(db.Model):
 
     members = db.relationship("User", secondary=memberships,
         backref=db.backref("groups", lazy="dynamic"))
+    events = db.relationship("Event", backref="group")
 
     def __init__(self, groupname, description, fud_date=None):
         self.groupname = groupname
@@ -84,3 +87,25 @@ class Group(db.Model):
 # retirve all user for a resturant
 # User.query.filter(User.groups.any(name=name)).all()
 
+class Event(db.Model):
+    """docstring for Group"""
+    __tablename__ = "event"
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String, nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    group_id = db.Column(db.Integer, ForeignKey('group.id'))
+    author_id = db.Column(db.Integer, ForeignKey('user.id'))
+    pub_date = db.Column(db.DateTime)
+
+    def __init__(self, title, description, group_id, author_id, pub_date=None):
+        self.title = title
+        self.description = description
+        self.author_id = author_id
+        self.group_id = group_id
+        if pub_date is None:
+            pub_date = datetime.utcnow()
+        self.pub_date = pub_date
+
+    def __repr__(self):
+        return '<Event %r>' % self.title
