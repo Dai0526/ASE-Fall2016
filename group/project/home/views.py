@@ -1,7 +1,7 @@
 # imports
 from datetime import datetime
 from flask import Flask, request, session, url_for, redirect, \
-     render_template, abort, g, flash, _app_ctx_stack, Response, Blueprint
+     render_template, abort, g, flash, _app_ctx_stack,make_response, Response, Blueprint
 
 from project import db
 from project.models import *
@@ -68,9 +68,13 @@ def add_message():
 
 @home_blueprint.route('/<username>')
 def user_timeline(username):
+    if 'user_id' not in session:
+        return render_template('/login.html', error="please login first")
     """Display's a users tweets."""
     profile_user = db.session.query(User).filter_by(username=username).first()
     if profile_user is None:
         abort(404)
     messages = db.session.query(Message).filter_by(author_id=profile_user.id).order_by(Message.pub_date.desc()).limit(30).all()
-    return render_template('timeline.html', messages=messages, profile_user=profile_user)
+    resp=make_response(render_template('timeline.html', messages=messages, profile_user=profile_user))
+    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+    return resp

@@ -1,7 +1,7 @@
 # imports
 from datetime import datetime
 from flask import Flask, request, session, url_for, redirect, \
-     render_template, abort, g, flash, _app_ctx_stack, Response, Blueprint
+     render_template, abort, g, flash, _app_ctx_stack, Response, Blueprint, make_response
 
 from project import db
 from project.models import *
@@ -31,11 +31,16 @@ def before_request():
     if 'user_id' in session:
         g.user = db.session.query(User).filter_by(id=session['user_id']).first()
 
+#@groups_blueprint.after_request
+#def after_request(response):
+#	response.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate')
+	
+		
 @groups_blueprint.route('/creategroup', methods=['GET', 'POST'])
 @login_required
 def creategroup():
-    # if 'user_id' not in session:
-    #     return  render_template('/login.html', error="please login first")
+    if 'user_id' not in session:
+        return  render_template('/login.html', error="please login first")
     """Create a group."""
     if not g.user:
         return redirect(url_for('home.timeline'))
@@ -69,51 +74,65 @@ def creategroup():
             # db.commit()
             flash('You were successfully create a group')
             return redirect(url_for('home.timeline'))
-    return render_template('creategroup.html', error=error)
+    resp=make_response(render_template('creategroup.html', error=error))
+    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+    return resp
 
 @groups_blueprint.route('/groups')
 @login_required
 def groups():
-    # if 'user_id' not in session:
-    #     return  render_template('/login.html', error="please login first")
+    if 'user_id' not in session:
+        return  render_template('/login.html', error="please login first")
     """Displays the latest all groups."""
-    return render_template('groups.html',
-        groups=
-        db.session.query(Group).order_by(Group.fud_date.desc()).limit(30).all()
-        )
+    
+    resp=make_response(render_template('groups.html', groups= db.session.query(Group).order_by(Group.fud_date.desc()).limit(30).all()))
+    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+    return resp
+    #return render_template('groups.html',
+    #    groups=
+     #   db.session.query(Group).order_by(Group.fud_date.desc()).limit(30).all()
+     #   )
 
 
 @groups_blueprint.route('/my_group')
 @login_required
 def my_group():
     """Displays the latest all groups."""
-    # if 'user_id' not in session:
-    #     return  render_template('/login.html', error="please login first")
-    return render_template('my_group.html',
-        mygroups=
-        db.session.query(Group).filter(Group.members.any(id=session['user_id'])).all()
-        )
+    if 'user_id' not in session:
+        return  render_template('/login.html', error="please login first")
+    resp=make_response(render_template('my_group.html', mygroups=db.session.query(Group).filter(Group.members.any(id=session['user_id'])).all()))
+    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+    return resp
+
+
+    #return render_template('my_group.html',
+    #    mygroups=
+    #    db.session.query(Group).filter(Group.members.any(id=session['user_id'])).all()
+    #    )
+
+
 
 @groups_blueprint.route('/groups/<groupname>')
 @login_required
 def group_info(groupname):
-    # if 'user_id' not in session:
-    #     return  render_template('/login.html', error="please login first")
+    if 'user_id' not in session:
+        return  render_template('/login.html', error="please login first")
     """Display members of groups."""
     profile_group = db.session.query(Group).filter_by(groupname=groupname).first()
     if profile_group is None:
         abort(404)
-    return render_template('groups.html',
+    resp=make_response(render_template('groups.html',
      groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).order_by(Event.pub_date.desc()).all(),
      groupmembers=db.session.query(User).filter(User.groups.any(groupname=groupname)).all(),
-     profile_group=profile_group)
-
+     profile_group=profile_group))
+    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+    return resp
 
 @groups_blueprint.route('/groups/<groupname>/add_member', methods=['POST'])
 @login_required
 def add_member(groupname):
-    # if 'user_id' not in session:
-    #     return  render_template('/login.html', error="please login first")
+    if 'user_id' not in session:
+        return  render_template('/login.html', error="please login first")
     """Registers a new member for the group."""
     # if 'user_id' not in session:
     #     abort(401)
