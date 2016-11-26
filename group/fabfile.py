@@ -1,9 +1,9 @@
 from fabric.api import local
 
 def test():
-	local("python ./test_flaskr.py")
+	local("python ./test_group.py")
 
 def run():
-	local("python ./flaskr.py")
+	local("python ./run.py")
 
 
