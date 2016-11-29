@@ -34,8 +34,8 @@ def before_request():
 #@groups_blueprint.after_request
 #def after_request(response):
 #	response.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate')
-	
-		
+
+
 @groups_blueprint.route('/creategroup', methods=['GET', 'POST'])
 @login_required
 def creategroup():
@@ -84,7 +84,7 @@ def groups():
     if 'user_id' not in session:
         return  render_template('/login.html', error="please login first")
     """Displays the latest all groups."""
-    
+
     resp=make_response(render_template('groups.html', groups= db.session.query(Group).order_by(Group.fud_date.desc()).limit(30).all()))
     resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
     return resp
@@ -92,7 +92,6 @@ def groups():
     #    groups=
      #   db.session.query(Group).order_by(Group.fud_date.desc()).limit(30).all()
      #   )
-
 
 @groups_blueprint.route('/my_group')
 @login_required
@@ -115,6 +114,7 @@ def my_group():
 @groups_blueprint.route('/groups/<groupname>')
 @login_required
 def group_info(groupname):
+
     if 'user_id' not in session:
         return  render_template('/login.html', error="please login first")
     """Display members of groups."""
@@ -133,9 +133,7 @@ def group_info(groupname):
 def add_member(groupname):
     if 'user_id' not in session:
         return  render_template('/login.html', error="please login first")
-    """Registers a new member for the group."""
-    # if 'user_id' not in session:
-    #     abort(401)
+
     user = db.session.query(User).filter_by(username=request.form['username']).first()
     if user is None:
         flash('Invalid username')
@@ -166,17 +164,22 @@ def add_event(groupname):
 @groups_blueprint.route('/groups/<groupname>/download', methods=['GET'])
 @login_required
 def download(groupname):
-    profile_group = db.session.query(Group).filter_by(groupname=groupname).first()
-    if profile_group is None:
-        abort(404)
-    groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).all()
-    csv = 'title,description,author,date\n'
-    for event in groupevents:
-        csv += event.title + ',' + event.description + ',' + event.author.username + ',' + str(event.pub_date) + '\n'
-    return Response(
-        csv,
-        mimetype="text/csv",
-        headers={"Content-disposition":
+    group = db.session.query(Group).filter_by(groupname=groupname).first()
+    user = db.session.query(User).filter_by(id=session['user_id']).first()
+    if user not in group.members:
+        flash('Only users in this group can download this file.')
+    else:
+        profile_group = db.session.query(Group).filter_by(groupname=groupname).first()
+        if profile_group is None:
+            abort(404)
+            groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).all()
+            csv = 'title,description,author,date\n'
+            for event in groupevents:
+                csv += event.title + ',' + event.description + ',' + event.author.username + ',' + str(event.pub_date) + '\n'
+                return Response(
+                csv,
+                mimetype="text/csv",
+                headers={"Content-disposition":
                  "attachment; filename=myplot.csv"})
     return redirect(url_for('groups.group_info', groupname=groupname))
 
@@ -225,6 +228,3 @@ def download(groupname):
 #             db.commit()
 #             flash('The member was added')
 #     return redirect(url_for('groups.my_group_info', groupname=groupname))
-
-
-
