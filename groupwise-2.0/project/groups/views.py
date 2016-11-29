@@ -136,7 +136,7 @@ def add_member(groupname):
     group = db.session.query(Group).filter_by(groupname=groupname).first()
     user = db.session.query(User).filter_by(id=session['user_id']).first()
     if user not in group.members:
-        flash('You are not in that group')
+        flash('Only members can add people!')
     else:
         user = db.session.query(User).filter_by(username=request.form['username']).first()
         if user is None:
@@ -144,7 +144,7 @@ def add_member(groupname):
         else:
             group = db.session.query(Group).filter_by(groupname=groupname).first()
             if user in group.members:
-                flash('User was in that group')
+                flash('User '+str(user) +' is already in that group')
             else:
                 group.members.append(user)
                 db.session.commit()
@@ -157,7 +157,7 @@ def add_event(groupname):
     group = db.session.query(Group).filter_by(groupname=groupname).first()
     user = db.session.query(User).filter_by(id=session['user_id']).first()
     if user not in group.members:
-        flash('You are not in that group')
+        flash('Only members can add events!')
     else:
         new_event = Event(request.form['title'],request.form['text'], user.id, group.id)
         db.session.add(new_event)
@@ -176,15 +176,15 @@ def download(groupname):
         profile_group = db.session.query(Group).filter_by(groupname=groupname).first()
         if profile_group is None:
             abort(404)
-            groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).all()
-            csv = 'title,description,author,date\n'
-            for event in groupevents:
-                csv += event.title + ',' + event.description + ',' + event.author.username + ',' + str(event.pub_date) + '\n'
-                return Response(
-                csv,
-                mimetype="text/csv",
-                headers={"Content-disposition":
-                 "attachment; filename=myplot.csv"})
+        groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).all()
+        csv = 'title,description,author,date\n'
+        for event in groupevents:
+            csv += event.title + ',' + event.description + ',' + event.author.username + ',' + str(event.pub_date) + '\n'
+        return Response(
+            csv,
+            mimetype="text/csv",
+            headers={"Content-disposition":
+            "attachment; filename=myplot.csv"})
     return redirect(url_for('groups.group_info', groupname=groupname))
 
 # @groups_blueprint.route('/my_gourp/<groupname>')

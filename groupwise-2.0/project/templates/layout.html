@@ -47,7 +47,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                  {% if g.user %} 
+                  {% if g.user %}
                     <li>
                         <a href="{{ url_for('home.timeline') }}">My Timeline</a>
                     </li>
@@ -55,26 +55,26 @@
                         <a href="{{ url_for('home.public_timeline') }}">Public Timeline</a>
                     </li>
                     <li>
-                        <a href="{{ url_for('users.logout') }}">sign out [{{ g.user.username }}]</a>
+                        <a href="{{ url_for('users.logout') }}">Sign Out [{{ g.user.username }}]</a>
                     </li>
                     <li>
                       <a href="{{ url_for('groups.creategroup') }}">Create Group</a>
                     </li>
                     <li>
-                      <a href="{{ url_for('groups.groups') }}">groups</a>
+                      <a href="{{ url_for('groups.groups') }}">Public Groups</a>
                     </li>
                     <li>
-                      <a href="{{ url_for('groups.my_group') }}">My group</a>
+                      <a href="{{ url_for('groups.my_group') }}">My Group</a>
                     </li>
                   {% else %}
                     <li>
-                      <a href="{{ url_for('home.public_timeline') }}">public timeline</a>
+                      <a href="{{ url_for('home.public_timeline') }}">Public Timeline</a>
                     </li>
                     <li>
-                      <a href="{{ url_for('users.register') }}">sign up</a>
+                      <a href="{{ url_for('users.register') }}">Sign Up</a>
                     </li>
                     <li>
-                      <a href="{{ url_for('users.login') }}">sign in</a>
+                      <a href="{{ url_for('users.login') }}">Sign In</a>
                     </li>
                   {% endif %}
                 </ul>
@@ -85,7 +85,7 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">     
+    <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                   {% with flashes = get_flashed_messages() %}
@@ -100,7 +100,7 @@
                   <div class="body">
                     <ul class="list-unstyled">                       {% block body %}  {% endblock %}
                     </ul>
-                  </div>  
+                  </div>
             </div>
         </div>
         <!-- /.row -->
