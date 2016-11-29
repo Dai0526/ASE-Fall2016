@@ -133,18 +133,22 @@ def group_info(groupname):
 def add_member(groupname):
     if 'user_id' not in session:
         return  render_template('/login.html', error="please login first")
-
-    user = db.session.query(User).filter_by(username=request.form['username']).first()
-    if user is None:
-        flash('Invalid username')
+    group = db.session.query(Group).filter_by(groupname=groupname).first()
+    user = db.session.query(User).filter_by(id=session['user_id']).first()
+    if user not in group.members:
+        flash('You are not in that group')
     else:
-        group = db.session.query(Group).filter_by(groupname=groupname).first()
-        if user in group.members:
-            flash('User was in that group')
+        user = db.session.query(User).filter_by(username=request.form['username']).first()
+        if user is None:
+            flash('Invalid username')
         else:
-            group.members.append(user)
-            db.session.commit()
-            flash('The member was added')
+            group = db.session.query(Group).filter_by(groupname=groupname).first()
+            if user in group.members:
+                flash('User was in that group')
+            else:
+                group.members.append(user)
+                db.session.commit()
+                flash('The member was added')
     return redirect(url_for('groups.group_info', groupname=groupname))
 
 @groups_blueprint.route('/groups/<groupname>/add_event', methods=['POST'])
