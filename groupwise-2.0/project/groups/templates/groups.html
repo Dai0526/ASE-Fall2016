@@ -12,7 +12,7 @@
   <h2>{{ self.title() }}</h2>
   {% if request.endpoint == 'groups.groups' %}
   <ul class="messages">
-  <table class="table">
+  <table class="table" align="center">
 
     <tr>
       <th>Group Name</th>
@@ -38,7 +38,7 @@
   {% endif %}
 
   {% if request.endpoint == 'groups.group_info' %}
-  <table class="table">
+  <table class="table" align="center">
     <tr>
       <th colspan="2">EVENT</th>
     </tr>
@@ -101,7 +101,7 @@
 
     </table>
     
-  <table>
+  <table align="center">
     <tr>
       <th> <a href="{{ url_for('groups.download', groupname=profile_group.groupname) }}">Download Logs</a>
       </th>
@@ -109,7 +109,7 @@
  
   </table>
 
-  <table class="table">
+  <table class="table" align="center">
     <tr>
       <th colspan="2">MEMBER</th>
     </tr>
