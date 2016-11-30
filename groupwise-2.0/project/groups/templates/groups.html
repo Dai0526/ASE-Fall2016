@@ -16,7 +16,7 @@
 
     <tr>
       <th>Group Name</th>
-      <th>DESCRIPTION</th>      
+      <th>DESCRIPTION</th>
     </tr>
 
     {% for group in groups %}
@@ -78,7 +78,7 @@
           <tr>
             <th>Event List</th>
           </tr>
-        
+
           <tr>
             <td>
               <ul class="messages">
@@ -86,8 +86,8 @@
                 <li><img src="{{ groupevent.author.email|gravatar(size=48) }}"><p>
                 <strong><a href="{{ url_for('home.user_timeline', username=groupevent.author.username)
                 }}">{{ groupevent.author.username }}</a></strong>
-                <h3>{{ groupevent.title }}</h3>>
-                {{ groupevent.text }}
+                <h3>{{ groupevent.title }}</h3>
+                <p>{{ groupevent.description }}</p>
                 <small>&mdash; {{ groupevent.pub_date.strftime('%Y-%m-%d %H:%M')}}</small>
               {% else %}
                 <li><em>There's no event so far.</em>
@@ -100,13 +100,13 @@
     </tr>
 
     </table>
-    
+
   <table align="center">
     <tr>
       <th> <a href="{{ url_for('groups.download', groupname=profile_group.groupname) }}">Download Logs</a>
       </th>
     </tr>
- 
+
   </table>
 
   <table class="table" align="center">
@@ -118,7 +118,7 @@
       <td>
         <table>
           <tr>
-            <th>Add Member</th>       
+            <th>Add Member</th>
           </tr>
 
           <tr>
@@ -167,15 +167,15 @@
                 {% endfor %}
 
               </table>
-            
+
             </td>
 
           </tr>
         </table>
-      </td>     
+      </td>
     </tr>
   </table>
-    
+
 
   {% endif %}
 
