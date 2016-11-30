@@ -87,7 +87,7 @@
                 <strong><a href="{{ url_for('home.user_timeline', username=groupevent.author.username)
                 }}">{{ groupevent.author.username }}</a></strong>
                 <h3>{{ groupevent.title }}</h3>>
-                {{ groupevent.text }}
+                {{ groupevent.description }}
                 <small>&mdash; {{ groupevent.pub_date.strftime('%Y-%m-%d %H:%M')}}</small>
               {% else %}
                 <li><em>There's no event so far.</em>
