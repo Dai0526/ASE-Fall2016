@@ -103,13 +103,10 @@ def my_group():
     resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
     return resp
 
-
     #return render_template('my_group.html',
     #    mygroups=
     #    db.session.query(Group).filter(Group.members.any(id=session['user_id'])).all()
     #    )
-
-
 
 @groups_blueprint.route('/groups/<groupname>')
 @login_required
@@ -159,7 +156,7 @@ def add_event(groupname):
     if user not in group.members:
         flash('Only members can add events!')
     else:
-        new_event = Event(request.form['title'],request.form['text'], user.id, group.id)
+        new_event = Event(request.form['title'], request.form['text'], group.id, user.id)
         db.session.add(new_event)
         db.session.commit()
         flash('New event was added')
