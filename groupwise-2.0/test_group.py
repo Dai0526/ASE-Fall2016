@@ -66,10 +66,12 @@ class GroupTestCase(TestCase):
         assert 'No entries here so far' not in rv.data
         assert 'Hello World!' in rv.data
 
+
     def test_group(self):
 		#login and create group
 		self.register('myname', 'my@email', 'mypassword', 'mypassword')
 		self.register('myname2', 'my2@email', 'mypassword2', 'mypassword2')
+		self.register('myname3', 'my3@email', 'mypassword3', 'mypassword3')
 		rv = self.login('myname','mypassword')
 		rv = self.client.post('/creategroup', data=dict(groupname='groupname1',description='This is a description'), follow_redirects=True)
 		assert 'You were successfully create a group' in rv.data
@@ -86,12 +88,28 @@ class GroupTestCase(TestCase):
 		#add member that already in
 		self.client.get( '/groups/groupname1' , follow_redirects=True)
 		rv = self.client.post('/groups/groupname1/add_member', data=dict(username='myname2'), follow_redirects=True)
-		assert 'User was in that group' in rv.data
+		assert 'User is already in group' in rv.data
 
 		#add unregistered user
 		self.client.get( '/groups/groupname1' , follow_redirects=True)
-		rv = self.client.post('/groups/groupname1/add_member', data=dict(username='myname3'), follow_redirects=True)
+		rv = self.client.post('/groups/groupname1/add_member', data=dict(username='myname4'), follow_redirects=True)
 		assert 'Invalid username' in rv.data
+
+		rv=self.logout();
+		rv = self.login('myname3','mypassword3')
+		
+    def test_event(self):
+		#login and create group
+		self.register('myname', 'my@email', 'mypassword', 'mypassword')
+		self.register('myname2', 'my2@email', 'mypassword2', 'mypassword2')
+		self.register('myname3', 'my3@email', 'mypassword3', 'mypassword3')
+		rv = self.login('myname','mypassword')
+		rv = self.client.post('/creategroup', data=dict(groupname='groupname1',description='This is a description'), follow_redirects=True)
+		assert 'You were successfully create a group' in rv.data
+
+		#create event with only one member
+		rv.slef.client.post('creategroup',data=dict(eventname='event1',description='description1'),follow_redirects=True)
+		assert 'You were successfully create a group' in rv.data
 
     def test_cache(self):
         self.register('myname', 'my@email', 'mypassword', 'mypassword')
