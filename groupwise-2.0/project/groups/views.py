@@ -144,7 +144,7 @@ def add_member(groupname):
         else:
             group = db.session.query(Group).filter_by(groupname=groupname).first()
             if user in group.members:
-                flash('User '+str(user) +' is already in that group')
+                flash('User is already in group')
             else:
                 group.members.append(user)
                 db.session.commit()
