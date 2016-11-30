@@ -74,25 +74,40 @@
       </td>
 
       <td>
-        <table>
+        <table class="table" align="center">
           <tr>
             <th>Event List</th>
           </tr>
 
           <tr>
             <td>
-              <ul class="messages">
+            <table class="table" align="center">
+              <tr>
+                <th>Owner</th>
+                <th>Event Info</th>
+              </tr>
+
+
               {% for groupevent in groupevents %}
-                <li><img src="{{ groupevent.author.email|gravatar(size=48) }}"><p>
-                <strong><a href="{{ url_for('home.user_timeline', username=groupevent.author.username)
-                }}">{{ groupevent.author.username }}</a></strong>
-                <h3>{{ groupevent.title }}</h3>
+              <tr>  
+                <td>
+                  <img src="{{ groupevent.author.email|gravatar(size=48) }}"><p>
+                  <strong><a href="{{ url_for('home.user_timeline', username=groupevent.author.username)
+                  }}">{{ groupevent.author.username }}</a></strong>
+                </td>
+
+                <td>
+                  <h3>{{ groupevent.title }}</h3>
                 <p>{{ groupevent.description }}</p>
+
                 <small>&mdash; {{ groupevent.pub_date.strftime('%Y-%m-%d %H:%M')}}</small>
+                </td>
               {% else %}
                 <li><em>There's no event so far.</em>
               {% endfor %}
-              </ul>
+
+              </tr>
+            </table>
             </td>
           </tr>
         </table>

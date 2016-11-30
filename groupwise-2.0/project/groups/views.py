@@ -176,7 +176,11 @@ def download(groupname):
         groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).all()
         csv = "\"title\",\"description\",\"author\",\"date\"\n"
         for event in groupevents:
+<<<<<<< HEAD
             csv += "\"" + event.title + "\",\"" + event.description + "\",\"" + event.author.username + "\",\"" + str(event.pub_date) + "\n"
+=======
+            csv += event.title + ',' + (event.description).rstrip('\n') + ',' + (event.author.username).rstrip('\n') + ',' + str(event.pub_date) + '\n'
+>>>>>>> 4c4431f966c4396207ad85bd24ef9d6c3549e434
         return Response(
             csv,
             mimetype="text/csv",
