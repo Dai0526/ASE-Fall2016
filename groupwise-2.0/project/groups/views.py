@@ -174,14 +174,14 @@ def download(groupname):
         if profile_group is None:
             abort(404)
         groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).all()
-        csv = 'title,description,author,date\n'
+        csv = "\"title\",\"description\",\"author\",\"date\"\n"
         for event in groupevents:
-            csv += event.title + ',' + (event.description).rstrip('\n') + ',' + (event.author.username).rstrip('\n') + ',' + str(event.pub_date) + '\n'
+            csv += "\"" + event.title + "\",\"" + event.description + "\",\"" + event.author.username + "\",\"" + str(event.pub_date) + "\"\n"
         return Response(
             csv,
             mimetype="text/csv",
-            headers={"Content-disposition":
-            "attachment; filename=myplot.csv"})
+            headers={"Content-disposition": "attachment; filename=myplot.csv"}
+            )
     return redirect(url_for('groups.group_info', groupname=groupname))
 
 # @groups_blueprint.route('/my_gourp/<groupname>')

@@ -104,7 +104,7 @@ class Event(db.Model):
         self.author_id = author_id
         self.group_id = group_id
         if pub_date is None:
-            pub_date = datetime.utcnow()
+            pub_date = datetime.now()
         self.pub_date = pub_date
 
     def __repr__(self):
