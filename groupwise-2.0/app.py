@@ -9,7 +9,7 @@ from werkzeug import check_password_hash, generate_password_hash
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 import sqlite3
-
+from flask_bootstrap import Bootstrap
 # create the application object
 app = Flask(__name__)
 

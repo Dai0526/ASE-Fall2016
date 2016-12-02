@@ -103,13 +103,36 @@ class GroupTestCase(TestCase):
 		self.register('myname', 'my@email', 'mypassword', 'mypassword')
 		self.register('myname2', 'my2@email', 'mypassword2', 'mypassword2')
 		self.register('myname3', 'my3@email', 'mypassword3', 'mypassword3')
+		self.register('myname4', 'my4@email', 'mypassword4', 'mypassword4')		
 		rv = self.login('myname','mypassword')
 		rv = self.client.post('/creategroup', data=dict(groupname='groupname1',description='This is a description'), follow_redirects=True)
 		assert 'You were successfully create a group' in rv.data
 
-		#create event with only one member
-		rv.slef.client.post('creategroup',data=dict(eventname='event1',description='description1'),follow_redirects=True)
-		assert 'You were successfully create a group' in rv.data
+		#add event
+		rv = self.client.post('/groups/groupname1/add_member',data=dict(username='myname3'),follow_redirects=True)
+		assert 'The member was added' in rv.data
+		assert 'Only members can add people!' not in rv.data
+		assert 'User is already in group' not in rv.data
+		
+		#add same user should pop up message
+		rv = self.client.post('/groups/groupname1/add_member',data=dict(username='myname3'),follow_redirects=True)
+		assert 'User is already in group' in rv.data
+		assert 'The member was added' not in rv.data
+		assert 'Only members can add people!' not in rv.data
+
+
+		#change user who is not in that group and add event
+		self.logout()
+		rv = self.login('myname2','mypassword2')
+		rv = self.client.post('/groups/groupname1/add_event',data=dict(title='event1',text='description1'),follow_redirects=True)
+		assert 'New event was added' not in rv.data
+		assert 'Only members can add events!' in rv.data
+
+		rv = self.client.post('/groups/groupname1/add_member',data=dict(username='myname4'),follow_redirects=True)
+		assert 'User is already in group' not in rv.data
+		assert 'The member was added' not in rv.data
+		assert 'Only members can add people!' in rv.data
+
 
     def test_cache(self):
         self.register('myname', 'my@email', 'mypassword', 'mypassword')
