@@ -1,4 +1,4 @@
-# group
+# group [![Codecov branch](https://img.shields.io/codecov/c/github/codecov/example-python/master.svg)](https://codecov.io/gh/Dai0526/ASE-Fall2016)
 ----
 ## ASE class
 
