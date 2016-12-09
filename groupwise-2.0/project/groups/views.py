@@ -42,8 +42,8 @@ def creategroup():
     if 'user_id' not in session:
         return  render_template('/login.html', error="please login first")
     """Create a group."""
-    if not g.user:
-        return redirect(url_for('home.timeline'))
+    # if not g.user:
+    #     return redirect(url_for('home.timeline'))
     error = None
     if request.method == 'POST':
         if not request.form['groupname']:
@@ -84,7 +84,6 @@ def groups():
     if 'user_id' not in session:
         return  render_template('/login.html', error="please login first")
     """Displays the latest all groups."""
-
     resp=make_response(render_template('groups.html', groups= db.session.query(Group).order_by(Group.fud_date.desc()).limit(30).all()))
     resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
     return resp
@@ -111,10 +110,9 @@ def my_group():
 @groups_blueprint.route('/groups/<groupname>')
 @login_required
 def group_info(groupname):
-
+    #Display members of groups.
     if 'user_id' not in session:
         return  render_template('/login.html', error="please login first")
-    """Display members of groups."""
     profile_group = db.session.query(Group).filter_by(groupname=groupname).first()
     if profile_group is None:
         abort(404)
