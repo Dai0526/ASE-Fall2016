@@ -17,17 +17,6 @@ users_blueprint = Blueprint(
     template_folder='templates'
 )   # pragma: no cover
 
-# login required decorator
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'user_id' in session:
-            return f(*args, **kwargs)
-        else:
-            flash('You need to login first.')
-            return redirect(url_for('users.login'))
-    return wrap
-
 @users_blueprint.before_request
 def before_request():
     g.user = None
