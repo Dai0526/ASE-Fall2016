@@ -1,5 +1,5 @@
 import os
-from hw2-tf2377pair import groupwise
+import groupwise
 import tempfile
 import unittest
 
