@@ -1,0 +1,150 @@
+************* Module 2
+F:  1, 0: No module named 2 (fatal)
+************* Module project.users.views
+C: 78, 0: Line too long (101/100) (line-too-long)
+C: 81, 0: Line too long (122/100) (line-too-long)
+C:  1, 0: Missing module docstring (missing-docstring)
+E:  7, 0: No name 'check_password_hash' in module 'werkzeug' (no-name-in-module)
+E:  7, 0: No name 'generate_password_hash' in module 'werkzeug' (no-name-in-module)
+C: 15, 0: Invalid constant name "users_blueprint" (invalid-name)
+C: 21, 0: Invalid argument name "f" (invalid-name)
+C: 21, 0: Missing function docstring (missing-docstring)
+C: 23, 4: Missing function docstring (missing-docstring)
+C: 32, 0: Missing function docstring (missing-docstring)
+E: 35,17: Instance of 'scoped_session' has no 'query' member (no-member)
+C: 39, 0: Missing function docstring (missing-docstring)
+E: 44,15: Instance of 'scoped_session' has no 'query' member (no-member)
+E: 78,13: Instance of 'scoped_session' has no 'query' member (no-member)
+E: 82,12: Instance of 'scoped_session' has no 'add' member (no-member)
+E: 83,12: Instance of 'scoped_session' has no 'commit' member (no-member)
+W:  2, 0: Unused md5 imported from hashlib (unused-import)
+W:  3, 0: Unused Flask imported from flask (unused-import)
+W:  3, 0: Unused abort imported from flask (unused-import)
+W:  3, 0: Unused _app_ctx_stack imported from flask (unused-import)
+W:  3, 0: Unused Response imported from flask (unused-import)
+W:  9, 0: Unused Bootstrap imported from flask_bootstrap (unused-import)
+W: 11, 0: Unused app imported from project (unused-import)
+C:  8, 0: standard import "from functools import wraps" comes before "from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash, _app_ctx_stack, Response, Blueprint" (wrong-import-order)
+C:  9, 0: external import "from flask_bootstrap import Bootstrap" comes before "from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash, _app_ctx_stack, Response, Blueprint" (wrong-import-order)
+
+
+Report
+======
+58 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |1          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|method   |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|function |6      |6          |=          |33.33       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+External dependencies
+---------------------
+::
+
+    flask (project.users.views)
+    flask_bootstrap (project.users.views)
+    project (project.users.views)
+      \-models (project.users.views)
+    werkzeug (project.users.views)
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |70     |80.46 |70       |=          |
++----------+-------+------+---------+-----------+
+|docstring |4      |4.60  |4        |=          |
++----------+-------+------+---------+-----------+
+|comment   |4      |4.60  |4        |=          |
++----------+-------+------+---------+-----------+
+|empty     |9      |10.34 |8        |+1.00      |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |=          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |11     |12       |-1.00      |
++-----------+-------+---------+-----------+
+|refactor   |0      |0        |=          |
++-----------+-------+---------+-----------+
+|warning    |7      |7        |=          |
++-----------+-------+---------+-----------+
+|error      |7      |7        |=          |
++-----------+-------+---------+-----------+
+
+
+
+% errors / warnings by module
+-----------------------------
+
++--------------------+-------+--------+---------+-----------+
+|module              |error  |warning |refactor |convention |
++====================+=======+========+=========+===========+
+|project.users.views |100.00 |100.00  |0.00     |100.00     |
++--------------------+-------+--------+---------+-----------+
+
+
+
+Messages
+--------
+
++-------------------+------------+
+|message id         |occurrences |
++===================+============+
+|unused-import      |7           |
++-------------------+------------+
+|no-member          |5           |
++-------------------+------------+
+|missing-docstring  |5           |
++-------------------+------------+
+|wrong-import-order |2           |
++-------------------+------------+
+|no-name-in-module  |2           |
++-------------------+------------+
+|line-too-long      |2           |
++-------------------+------------+
+|invalid-name       |2           |
++-------------------+------------+
+|fatal              |1           |
++-------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at 0.86/10 (previous run: 0.69/10, +0.17)
+

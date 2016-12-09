@@ -1,8 +1,9 @@
 # imports
+from hashlib import md5
 from flask import Flask, request, session, url_for, redirect, \
      render_template, abort, g, flash, _app_ctx_stack, Response, Blueprint
 
-from hashlib import md5
+
 from werkzeug import check_password_hash, generate_password_hash
 from functools import wraps
 from flask_bootstrap import Bootstrap

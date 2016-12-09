@@ -2,11 +2,12 @@
 from datetime import datetime
 from flask import Flask, request, session, url_for, redirect, \
      render_template, abort, g, flash, _app_ctx_stack,make_response, Response, Blueprint
+from functools import wraps
 from flask_bootstrap import Bootstrap
 from project import db
 from project.models import *
 
-from functools import wraps
+
 
 # config
 home_blueprint = Blueprint(
@@ -43,7 +44,7 @@ def index():
     if not g.user:
         return redirect(url_for('home.public_timeline'))
     messages = db.session.query(Message).filter_by(author_id=session['user_id']).order_by(Message.pub_date.desc()).limit(30).all()
-    resp=make_response(render_template('pub_timeline.html', messages=messages))
+    resp = make_response(render_template('pub_timeline.html', messages=messages))
 #    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
     return resp
 
@@ -64,8 +65,8 @@ def timeline():
     if not g.user:
         return redirect(url_for('home.public_timeline'))
     messages = db.session.query(Message).filter_by(author_id=session['user_id']).order_by(Message.pub_date.desc()).limit(30).all()
-    resp=make_response(render_template('timeline.html', messages=messages))
-    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+    resp = make_response(render_template('timeline.html', messages=messages))
+    resp.headers.add('Cache-Control', 'no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
     return resp
 
 @home_blueprint.route('/add_message', methods=['POST'])
@@ -92,6 +93,6 @@ def user_timeline(username):
     if profile_user is None:
         abort(404)
     messages = db.session.query(Message).filter_by(author_id=profile_user.id).order_by(Message.pub_date.desc()).limit(30).all()
-    resp=make_response(render_template('timeline.html', messages=messages, profile_user=profile_user))
+    resp = make_response(render_template('timeline.html', messages=messages, profile_user=profile_user))
     resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
     return resp

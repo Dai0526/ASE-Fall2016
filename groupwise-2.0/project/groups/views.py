@@ -2,11 +2,12 @@
 from datetime import datetime
 from flask import Flask, request, session, url_for, redirect, \
      render_template, abort, g, flash, _app_ctx_stack, Response, Blueprint, make_response
+from functools import wraps
 from flask_bootstrap import Bootstrap
 from project import db
 from project.models import *
 
-from functools import wraps
+
 
 # config
 groups_blueprint = Blueprint(
@@ -74,8 +75,8 @@ def creategroup():
             # db.commit()
             flash('You were successfully create a group')
             return redirect(url_for('home.timeline'))
-    resp=make_response(render_template('creategroup.html', error=error))
-    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+    resp= make_response(render_template('creategroup.html', error=error))
+    resp.headers.add('Cache-Control', 'no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
     return resp
 
 @groups_blueprint.route('/groups')
@@ -85,7 +86,7 @@ def groups():
         return  render_template('/login.html', error="please login first")
     """Displays the latest all groups."""
     resp=make_response(render_template('groups.html', groups= db.session.query(Group).order_by(Group.fud_date.desc()).limit(30).all()))
-    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+    resp.headers.add('Cache-Control', 'no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
     return resp
     #return render_template('groups.html',
     #    groups=
@@ -98,8 +99,8 @@ def my_group():
     """Displays the latest all groups."""
     if 'user_id' not in session:
         return  render_template('/login.html', error="please login first")
-    resp=make_response(render_template('my_group.html', mygroups=db.session.query(Group).filter(Group.members.any(id=session['user_id'])).all()))
-    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+    resp= make_response(render_template('my_group.html', mygroups=db.session.query(Group).filter(Group.members.any(id=session['user_id'])).all()))
+    resp.headers.add('Cache-Control', 'no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
     return resp
 
     #return render_template('my_group.html',
@@ -116,11 +117,11 @@ def group_info(groupname):
     profile_group = db.session.query(Group).filter_by(groupname=groupname).first()
     if profile_group is None:
         abort(404)
-    resp=make_response(render_template('groups.html',
-     groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).order_by(Event.pub_date.desc()).all(),
-     groupmembers=db.session.query(User).filter(User.groups.any(groupname=groupname)).all(),
-     profile_group=profile_group))
-    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+    resp= make_response(render_template('groups.html',
+    	groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).order_by(Event.pub_date.desc()).all(),
+    	groupmembers=db.session.query(User).filter(User.groups.any(groupname=groupname)).all(),
+    	profile_group=profile_group))
+    resp.headers.add('Cache-Control', 'no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
     return resp
 
 @groups_blueprint.route('/groups/<groupname>/add_member', methods=['POST'])
@@ -171,7 +172,7 @@ def download(groupname):
         profile_group = db.session.query(Group).filter_by(groupname=groupname).first()
         if profile_group is None:
             abort(404)
-        groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).all()
+        groupevents= db.session.query(Event).filter_by(group_id=profile_group.id).all()
         csv = "\"title\",\"description\",\"author\",\"date\"\n"
         for event in groupevents:
             csv += "\"" + event.title + "\",\"" + event.description + "\",\"" + event.author.username + "\",\"" + str(event.pub_date) + "\"\n"

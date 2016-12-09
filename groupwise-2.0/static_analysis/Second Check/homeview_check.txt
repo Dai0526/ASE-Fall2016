@@ -1,0 +1,168 @@
+************* Module 2
+F:  1, 0: No module named 2 (fatal)
+************* Module project.home.views
+C:  4, 0: Exactly one space required after comma
+     render_template, abort, g, flash, _app_ctx_stack,make_response, Response, Blueprint
+                                                     ^ (bad-whitespace)
+C: 46, 0: Line too long (130/100) (line-too-long)
+C: 67, 0: Line too long (130/100) (line-too-long)
+C: 95, 0: Line too long (127/100) (line-too-long)
+C: 96, 0: Line too long (104/100) (line-too-long)
+C: 97, 0: Exactly one space required after comma
+    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+                                    ^ (bad-whitespace)
+C:  1, 0: Missing module docstring (missing-docstring)
+W:  8, 0: Wildcard import project.models (wildcard-import)
+C: 13, 0: Invalid constant name "home_blueprint" (invalid-name)
+C: 19, 0: Missing function docstring (missing-docstring)
+E: 22,17: Instance of 'scoped_session' has no 'query' member (no-member)
+C: 25, 0: Invalid argument name "f" (invalid-name)
+C: 25, 0: Missing function docstring (missing-docstring)
+C: 27, 4: Missing function docstring (missing-docstring)
+E: 46,15: Instance of 'scoped_session' has no 'query' member (no-member)
+E: 54,15: Instance of 'scoped_session' has no 'query' member (no-member)
+E: 67,15: Instance of 'scoped_session' has no 'query' member (no-member)
+E: 82, 8: Instance of 'scoped_session' has no 'add' member (no-member)
+E: 83, 8: Instance of 'scoped_session' has no 'commit' member (no-member)
+C: 88, 0: Missing function docstring (missing-docstring)
+W: 91, 4: String statement has no effect (pointless-string-statement)
+E: 92,19: Instance of 'scoped_session' has no 'query' member (no-member)
+E: 95,15: Instance of 'scoped_session' has no 'query' member (no-member)
+W:  2, 0: Unused datetime imported from datetime (unused-import)
+W:  3, 0: Unused Flask imported from flask (unused-import)
+W:  3, 0: Unused _app_ctx_stack imported from flask (unused-import)
+W:  3, 0: Unused Response imported from flask (unused-import)
+W:  6, 0: Unused Bootstrap imported from flask_bootstrap (unused-import)
+W:  8, 0: Unused import Group from wildcard import (unused-wildcard-import)
+W:  8, 0: Unused import relationship from wildcard import (unused-wildcard-import)
+W:  8, 0: Unused import ForeignKey from wildcard import (unused-wildcard-import)
+W:  8, 0: Unused import memberships from wildcard import (unused-wildcard-import)
+W:  8, 0: Unused import Event from wildcard import (unused-wildcard-import)
+C:  5, 0: standard import "from functools import wraps" comes before "from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash, _app_ctx_stack, make_response, Response, Blueprint" (wrong-import-order)
+C:  6, 0: external import "from flask_bootstrap import Bootstrap" comes before "from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash, _app_ctx_stack, make_response, Response, Blueprint" (wrong-import-order)
+
+
+Report
+======
+56 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |1          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|method   |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|function |8      |8          |=          |50.00       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+External dependencies
+---------------------
+::
+
+    flask (project.home.views)
+    flask_bootstrap (project.home.views)
+    project (project.home.views)
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |69     |69.70 |69       |=          |
++----------+-------+------+---------+-----------+
+|docstring |13     |13.13 |13       |=          |
++----------+-------+------+---------+-----------+
+|comment   |7      |7.07  |7        |=          |
++----------+-------+------+---------+-----------+
+|empty     |10     |10.10 |9        |+1.00      |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |=          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |15     |19       |-4.00      |
++-----------+-------+---------+-----------+
+|refactor   |0      |0        |=          |
++-----------+-------+---------+-----------+
+|warning    |12     |12       |=          |
++-----------+-------+---------+-----------+
+|error      |8      |8        |=          |
++-----------+-------+---------+-----------+
+
+
+
+% errors / warnings by module
+-----------------------------
+
++-------------------+-------+--------+---------+-----------+
+|module             |error  |warning |refactor |convention |
++===================+=======+========+=========+===========+
+|project.home.views |100.00 |100.00  |0.00     |100.00     |
++-------------------+-------+--------+---------+-----------+
+
+
+
+Messages
+--------
+
++---------------------------+------------+
+|message id                 |occurrences |
++===========================+============+
+|no-member                  |8           |
++---------------------------+------------+
+|unused-wildcard-import     |5           |
++---------------------------+------------+
+|unused-import              |5           |
++---------------------------+------------+
+|missing-docstring          |5           |
++---------------------------+------------+
+|line-too-long              |4           |
++---------------------------+------------+
+|wrong-import-order         |2           |
++---------------------------+------------+
+|invalid-name               |2           |
++---------------------------+------------+
+|bad-whitespace             |2           |
++---------------------------+------------+
+|wildcard-import            |1           |
++---------------------------+------------+
+|pointless-string-statement |1           |
++---------------------------+------------+
+|fatal                      |1           |
++---------------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at -1.96/10 (previous run: -2.68/10, +0.71)
+
