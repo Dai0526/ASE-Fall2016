@@ -1,0 +1,213 @@
+************* Module 2
+F:  1, 0: No module named 2 (fatal)
+************* Module project.groups.views
+C: 78, 0: Exactly one space required before assignment
+    resp= make_response(render_template('creategroup.html', error=error))
+        ^ (bad-whitespace)
+C: 89, 0: Line too long (135/100) (line-too-long)
+C: 89, 0: Exactly one space required around assignment
+    resp=make_response(render_template('groups.html', groups= db.session.query(Group).order_by(Group.fud_date.desc()).limit(30).all()))
+        ^ (bad-whitespace)
+C: 89, 0: No space allowed after keyword argument assignment
+    resp=make_response(render_template('groups.html', groups= db.session.query(Group).order_by(Group.fud_date.desc()).limit(30).all()))
+                                                            ^ (bad-whitespace)
+C:103, 0: Line too long (146/100) (line-too-long)
+C:103, 0: Exactly one space required before assignment
+    resp= make_response(render_template('my_group.html', mygroups=db.session.query(Group).filter(Group.members.any(id=session['user_id'])).all()))
+        ^ (bad-whitespace)
+C:122, 0: Exactly one space required before assignment
+    resp= make_response(render_template('groups.html',
+        ^ (bad-whitespace)
+C:123, 0: Wrong continued indentation (add 35 spaces).
+    	groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).order_by(Event.pub_date.desc()).all(),
+     ^                                  | (bad-continuation)
+C:123, 0: Line too long (116/100) (line-too-long)
+C:124, 0: Wrong continued indentation (add 35 spaces).
+    	groupmembers=db.session.query(User).filter(User.groups.any(groupname=groupname)).all(),
+     ^                                  | (bad-continuation)
+C:125, 0: Wrong continued indentation (add 35 spaces).
+    	profile_group=profile_group))
+     ^                                  | (bad-continuation)
+C:177, 0: Exactly one space required before assignment
+        groupevents= db.session.query(Event).filter_by(group_id=profile_group.id).all()
+                   ^ (bad-whitespace)
+C:180, 0: Line too long (142/100) (line-too-long)
+C:202, 0: Line too long (107/100) (line-too-long)
+C:203, 0: Line too long (126/100) (line-too-long)
+C:  1, 0: Missing module docstring (missing-docstring)
+W:  8, 0: Wildcard import project.models (wildcard-import)
+C: 13, 0: Invalid constant name "groups_blueprint" (invalid-name)
+C: 19, 0: Invalid argument name "f" (invalid-name)
+C: 19, 0: Missing function docstring (missing-docstring)
+C: 21, 4: Missing function docstring (missing-docstring)
+C: 30, 0: Missing function docstring (missing-docstring)
+E: 33,17: Instance of 'scoped_session' has no 'query' member (no-member)
+C: 42, 0: Missing function docstring (missing-docstring)
+W: 45, 4: String statement has no effect (pointless-string-statement)
+E: 54,13: Class 'Group' has no 'query' member (no-member)
+E: 60,12: Instance of 'scoped_session' has no 'add' member (no-member)
+E: 61,12: Instance of 'scoped_session' has no 'commit' member (no-member)
+C: 84, 0: Missing function docstring (missing-docstring)
+W: 87, 4: String statement has no effect (pointless-string-statement)
+E: 89,62: Instance of 'scoped_session' has no 'query' member (no-member)
+E:103,66: Instance of 'scoped_session' has no 'query' member (no-member)
+C:114, 0: Missing function docstring (missing-docstring)
+W:118, 4: String statement has no effect (pointless-string-statement)
+E:119,20: Instance of 'scoped_session' has no 'query' member (no-member)
+E:123,17: Instance of 'scoped_session' has no 'query' member (no-member)
+E:124,18: Instance of 'scoped_session' has no 'query' member (no-member)
+E:124,48: Class 'User' has no 'groups' member (no-member)
+C:131, 0: Missing function docstring (missing-docstring)
+E:134,12: Instance of 'scoped_session' has no 'query' member (no-member)
+E:135,11: Instance of 'scoped_session' has no 'query' member (no-member)
+E:139,15: Instance of 'scoped_session' has no 'query' member (no-member)
+E:143,20: Instance of 'scoped_session' has no 'query' member (no-member)
+E:148,16: Instance of 'scoped_session' has no 'commit' member (no-member)
+C:154, 0: Missing function docstring (missing-docstring)
+E:155,12: Instance of 'scoped_session' has no 'query' member (no-member)
+E:156,11: Instance of 'scoped_session' has no 'query' member (no-member)
+E:161, 8: Instance of 'scoped_session' has no 'add' member (no-member)
+E:162, 8: Instance of 'scoped_session' has no 'commit' member (no-member)
+C:168, 0: Missing function docstring (missing-docstring)
+E:169,12: Instance of 'scoped_session' has no 'query' member (no-member)
+E:170,11: Instance of 'scoped_session' has no 'query' member (no-member)
+E:174,24: Instance of 'scoped_session' has no 'query' member (no-member)
+E:177,21: Instance of 'scoped_session' has no 'query' member (no-member)
+W:  2, 0: Unused datetime imported from datetime (unused-import)
+W:  3, 0: Unused Flask imported from flask (unused-import)
+W:  3, 0: Unused _app_ctx_stack imported from flask (unused-import)
+W:  6, 0: Unused Bootstrap imported from flask_bootstrap (unused-import)
+W:  8, 0: Unused import relationship from wildcard import (unused-wildcard-import)
+W:  8, 0: Unused import ForeignKey from wildcard import (unused-wildcard-import)
+W:  8, 0: Unused import memberships from wildcard import (unused-wildcard-import)
+W:  8, 0: Unused import Message from wildcard import (unused-wildcard-import)
+C:  5, 0: standard import "from functools import wraps" comes before "from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash, _app_ctx_stack, Response, Blueprint, make_response" (wrong-import-order)
+C:  6, 0: external import "from flask_bootstrap import Bootstrap" comes before "from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash, _app_ctx_stack, Response, Blueprint, make_response" (wrong-import-order)
+
+
+Report
+======
+105 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |1          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|method   |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|function |10     |10         |=          |10.00       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+External dependencies
+---------------------
+::
+
+    flask (project.groups.views)
+    flask_bootstrap (project.groups.views)
+    project (project.groups.views)
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |139    |59.66 |139      |=          |
++----------+-------+------+---------+-----------+
+|docstring |2      |0.86  |2        |=          |
++----------+-------+------+---------+-----------+
+|comment   |71     |30.47 |71       |=          |
++----------+-------+------+---------+-----------+
+|empty     |21     |9.01  |20       |+1.00      |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |=          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |29     |33       |-4.00      |
++-----------+-------+---------+-----------+
+|refactor   |0      |0        |=          |
++-----------+-------+---------+-----------+
+|warning    |12     |12       |=          |
++-----------+-------+---------+-----------+
+|error      |23     |23       |=          |
++-----------+-------+---------+-----------+
+
+
+
+% errors / warnings by module
+-----------------------------
+
++---------------------+-------+--------+---------+-----------+
+|module               |error  |warning |refactor |convention |
++=====================+=======+========+=========+===========+
+|project.groups.views |100.00 |100.00  |0.00     |100.00     |
++---------------------+-------+--------+---------+-----------+
+
+
+
+Messages
+--------
+
++---------------------------+------------+
+|message id                 |occurrences |
++===========================+============+
+|no-member                  |23          |
++---------------------------+------------+
+|missing-docstring          |10          |
++---------------------------+------------+
+|line-too-long              |6           |
++---------------------------+------------+
+|bad-whitespace             |6           |
++---------------------------+------------+
+|unused-wildcard-import     |4           |
++---------------------------+------------+
+|unused-import              |4           |
++---------------------------+------------+
+|pointless-string-statement |3           |
++---------------------------+------------+
+|bad-continuation           |3           |
++---------------------------+------------+
+|wrong-import-order         |2           |
++---------------------------+------------+
+|invalid-name               |2           |
++---------------------------+------------+
+|wildcard-import            |1           |
++---------------------------+------------+
+|fatal                      |1           |
++---------------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at -4.86/10 (previous run: -5.24/10, +0.38)
+

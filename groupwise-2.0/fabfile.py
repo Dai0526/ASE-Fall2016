@@ -6,4 +6,5 @@ def test():
 def run():
 	local("python ./run.py")
 
-
+def run_pub():
+	local("python ./run_pub.py")

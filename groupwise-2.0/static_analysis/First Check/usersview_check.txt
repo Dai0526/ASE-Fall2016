@@ -1,0 +1,151 @@
+************* Module 2
+F:  1, 0: No module named 2 (fatal)
+************* Module project.users.views
+C: 77, 0: Line too long (101/100) (line-too-long)
+C: 80, 0: Line too long (122/100) (line-too-long)
+C:  1, 0: Missing module docstring (missing-docstring)
+E:  6, 0: No name 'check_password_hash' in module 'werkzeug' (no-name-in-module)
+E:  6, 0: No name 'generate_password_hash' in module 'werkzeug' (no-name-in-module)
+C: 14, 0: Invalid constant name "users_blueprint" (invalid-name)
+C: 20, 0: Invalid argument name "f" (invalid-name)
+C: 20, 0: Missing function docstring (missing-docstring)
+C: 22, 4: Missing function docstring (missing-docstring)
+C: 31, 0: Missing function docstring (missing-docstring)
+E: 34,17: Instance of 'scoped_session' has no 'query' member (no-member)
+C: 38, 0: Missing function docstring (missing-docstring)
+E: 43,15: Instance of 'scoped_session' has no 'query' member (no-member)
+E: 77,13: Instance of 'scoped_session' has no 'query' member (no-member)
+E: 81,12: Instance of 'scoped_session' has no 'add' member (no-member)
+E: 82,12: Instance of 'scoped_session' has no 'commit' member (no-member)
+W:  2, 0: Unused Flask imported from flask (unused-import)
+W:  2, 0: Unused abort imported from flask (unused-import)
+W:  2, 0: Unused _app_ctx_stack imported from flask (unused-import)
+W:  2, 0: Unused Response imported from flask (unused-import)
+W:  5, 0: Unused md5 imported from hashlib (unused-import)
+W:  8, 0: Unused Bootstrap imported from flask_bootstrap (unused-import)
+W: 10, 0: Unused app imported from project (unused-import)
+C:  5, 0: standard import "from hashlib import md5" comes before "from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash, _app_ctx_stack, Response, Blueprint" (wrong-import-order)
+C:  7, 0: standard import "from functools import wraps" comes before "from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash, _app_ctx_stack, Response, Blueprint" (wrong-import-order)
+C:  8, 0: external import "from flask_bootstrap import Bootstrap" comes before "from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash, _app_ctx_stack, Response, Blueprint" (wrong-import-order)
+
+
+Report
+======
+58 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |NC         |NC         |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |0      |NC         |NC         |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|method   |0      |NC         |NC         |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|function |6      |NC         |NC         |33.33       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+External dependencies
+---------------------
+::
+
+    flask (project.users.views)
+    flask_bootstrap (project.users.views)
+    project (project.users.views)
+      \-models (project.users.views)
+    werkzeug (project.users.views)
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |70     |81.40 |NC       |NC         |
++----------+-------+------+---------+-----------+
+|docstring |4      |4.65  |NC       |NC         |
++----------+-------+------+---------+-----------+
+|comment   |4      |4.65  |NC       |NC         |
++----------+-------+------+---------+-----------+
+|empty     |8      |9.30  |NC       |NC         |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |NC       |NC         |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |NC       |NC         |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |12     |NC       |NC         |
++-----------+-------+---------+-----------+
+|refactor   |0      |NC       |NC         |
++-----------+-------+---------+-----------+
+|warning    |7      |NC       |NC         |
++-----------+-------+---------+-----------+
+|error      |7      |NC       |NC         |
++-----------+-------+---------+-----------+
+
+
+
+% errors / warnings by module
+-----------------------------
+
++--------------------+-------+--------+---------+-----------+
+|module              |error  |warning |refactor |convention |
++====================+=======+========+=========+===========+
+|project.users.views |100.00 |100.00  |0.00     |100.00     |
++--------------------+-------+--------+---------+-----------+
+
+
+
+Messages
+--------
+
++-------------------+------------+
+|message id         |occurrences |
++===================+============+
+|unused-import      |7           |
++-------------------+------------+
+|no-member          |5           |
++-------------------+------------+
+|missing-docstring  |5           |
++-------------------+------------+
+|wrong-import-order |3           |
++-------------------+------------+
+|no-name-in-module  |2           |
++-------------------+------------+
+|line-too-long      |2           |
++-------------------+------------+
+|invalid-name       |2           |
++-------------------+------------+
+|fatal              |1           |
++-------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at 0.69/10
+

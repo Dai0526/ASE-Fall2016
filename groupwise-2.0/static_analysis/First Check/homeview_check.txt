@@ -1,0 +1,180 @@
+************* Module 2
+F:  1, 0: No module named 2 (fatal)
+************* Module project.home.views
+C:  4, 0: Exactly one space required after comma
+     render_template, abort, g, flash, _app_ctx_stack,make_response, Response, Blueprint
+                                                     ^ (bad-whitespace)
+C: 45, 0: Line too long (130/100) (line-too-long)
+C: 46, 0: Exactly one space required around assignment
+    resp=make_response(render_template('pub_timeline.html', messages=messages))
+        ^ (bad-whitespace)
+C: 66, 0: Line too long (130/100) (line-too-long)
+C: 67, 0: Exactly one space required around assignment
+    resp=make_response(render_template('timeline.html', messages=messages))
+        ^ (bad-whitespace)
+C: 68, 0: Exactly one space required after comma
+    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+                                    ^ (bad-whitespace)
+C: 94, 0: Line too long (127/100) (line-too-long)
+C: 95, 0: Line too long (102/100) (line-too-long)
+C: 95, 0: Exactly one space required around assignment
+    resp=make_response(render_template('timeline.html', messages=messages, profile_user=profile_user))
+        ^ (bad-whitespace)
+C: 96, 0: Exactly one space required after comma
+    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+                                    ^ (bad-whitespace)
+C:  1, 0: Missing module docstring (missing-docstring)
+W:  7, 0: Wildcard import project.models (wildcard-import)
+C: 12, 0: Invalid constant name "home_blueprint" (invalid-name)
+C: 18, 0: Missing function docstring (missing-docstring)
+E: 21,17: Instance of 'scoped_session' has no 'query' member (no-member)
+C: 24, 0: Invalid argument name "f" (invalid-name)
+C: 24, 0: Missing function docstring (missing-docstring)
+C: 26, 4: Missing function docstring (missing-docstring)
+E: 45,15: Instance of 'scoped_session' has no 'query' member (no-member)
+E: 53,15: Instance of 'scoped_session' has no 'query' member (no-member)
+E: 66,15: Instance of 'scoped_session' has no 'query' member (no-member)
+E: 81, 8: Instance of 'scoped_session' has no 'add' member (no-member)
+E: 82, 8: Instance of 'scoped_session' has no 'commit' member (no-member)
+C: 87, 0: Missing function docstring (missing-docstring)
+W: 90, 4: String statement has no effect (pointless-string-statement)
+E: 91,19: Instance of 'scoped_session' has no 'query' member (no-member)
+E: 94,15: Instance of 'scoped_session' has no 'query' member (no-member)
+W:  2, 0: Unused datetime imported from datetime (unused-import)
+W:  3, 0: Unused Flask imported from flask (unused-import)
+W:  3, 0: Unused _app_ctx_stack imported from flask (unused-import)
+W:  3, 0: Unused Response imported from flask (unused-import)
+W:  5, 0: Unused Bootstrap imported from flask_bootstrap (unused-import)
+W:  7, 0: Unused import Group from wildcard import (unused-wildcard-import)
+W:  7, 0: Unused import relationship from wildcard import (unused-wildcard-import)
+W:  7, 0: Unused import ForeignKey from wildcard import (unused-wildcard-import)
+W:  7, 0: Unused import memberships from wildcard import (unused-wildcard-import)
+W:  7, 0: Unused import Event from wildcard import (unused-wildcard-import)
+C:  5, 0: external import "from flask_bootstrap import Bootstrap" comes before "from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash, _app_ctx_stack, make_response, Response, Blueprint" (wrong-import-order)
+C:  9, 0: standard import "from functools import wraps" comes before "from flask_bootstrap import Bootstrap" (wrong-import-order)
+
+
+Report
+======
+56 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |NC         |NC         |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |0      |NC         |NC         |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|method   |0      |NC         |NC         |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|function |8      |NC         |NC         |50.00       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+External dependencies
+---------------------
+::
+
+    flask (project.home.views)
+    flask_bootstrap (project.home.views)
+    project (project.home.views)
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |69     |70.41 |NC       |NC         |
++----------+-------+------+---------+-----------+
+|docstring |13     |13.27 |NC       |NC         |
++----------+-------+------+---------+-----------+
+|comment   |7      |7.14  |NC       |NC         |
++----------+-------+------+---------+-----------+
+|empty     |9      |9.18  |NC       |NC         |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |NC       |NC         |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |NC       |NC         |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |19     |NC       |NC         |
++-----------+-------+---------+-----------+
+|refactor   |0      |NC       |NC         |
++-----------+-------+---------+-----------+
+|warning    |12     |NC       |NC         |
++-----------+-------+---------+-----------+
+|error      |8      |NC       |NC         |
++-----------+-------+---------+-----------+
+
+
+
+% errors / warnings by module
+-----------------------------
+
++-------------------+-------+--------+---------+-----------+
+|module             |error  |warning |refactor |convention |
++===================+=======+========+=========+===========+
+|project.home.views |100.00 |100.00  |0.00     |100.00     |
++-------------------+-------+--------+---------+-----------+
+
+
+
+Messages
+--------
+
++---------------------------+------------+
+|message id                 |occurrences |
++===========================+============+
+|no-member                  |8           |
++---------------------------+------------+
+|bad-whitespace             |6           |
++---------------------------+------------+
+|unused-wildcard-import     |5           |
++---------------------------+------------+
+|unused-import              |5           |
++---------------------------+------------+
+|missing-docstring          |5           |
++---------------------------+------------+
+|line-too-long              |4           |
++---------------------------+------------+
+|wrong-import-order         |2           |
++---------------------------+------------+
+|invalid-name               |2           |
++---------------------------+------------+
+|wildcard-import            |1           |
++---------------------------+------------+
+|pointless-string-statement |1           |
++---------------------------+------------+
+|fatal                      |1           |
++---------------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at -2.68/10
+

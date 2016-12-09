@@ -9,7 +9,7 @@ from werkzeug import check_password_hash, generate_password_hash
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 import sqlite3
-
+from flask_bootstrap import Bootstrap
 # create the application object
 app = Flask(__name__)
 
@@ -85,7 +85,7 @@ def timeline():
 @app.route('/public')
 def public_timeline():
     """Displays the latest messages of all users."""
-    return render_template('timeline.html', messages=query_db('''
+    return render_template('pub_timeline.html', messages=query_db('''
         select message.*, user.* from message, user
         where message.author_id = user.user_id
         order by message.pub_date desc limit ?''', [30]))

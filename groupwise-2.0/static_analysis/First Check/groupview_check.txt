@@ -1,0 +1,225 @@
+************* Module 2
+F:  1, 0: No module named 2 (fatal)
+************* Module project.groups.views
+C: 77, 0: Exactly one space required around assignment
+    resp=make_response(render_template('creategroup.html', error=error))
+        ^ (bad-whitespace)
+C: 78, 0: Exactly one space required after comma
+    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+                                    ^ (bad-whitespace)
+C: 88, 0: Line too long (135/100) (line-too-long)
+C: 88, 0: Exactly one space required around assignment
+    resp=make_response(render_template('groups.html', groups= db.session.query(Group).order_by(Group.fud_date.desc()).limit(30).all()))
+        ^ (bad-whitespace)
+C: 88, 0: No space allowed after keyword argument assignment
+    resp=make_response(render_template('groups.html', groups= db.session.query(Group).order_by(Group.fud_date.desc()).limit(30).all()))
+                                                            ^ (bad-whitespace)
+C: 89, 0: Exactly one space required after comma
+    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+                                    ^ (bad-whitespace)
+C:102, 0: Line too long (145/100) (line-too-long)
+C:102, 0: Exactly one space required around assignment
+    resp=make_response(render_template('my_group.html', mygroups=db.session.query(Group).filter(Group.members.any(id=session['user_id'])).all()))
+        ^ (bad-whitespace)
+C:103, 0: Exactly one space required after comma
+    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+                                    ^ (bad-whitespace)
+C:121, 0: Exactly one space required around assignment
+    resp=make_response(render_template('groups.html',
+        ^ (bad-whitespace)
+C:122, 0: Wrong continued indentation (add 34 spaces).
+     groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).order_by(Event.pub_date.desc()).all(),
+     ^                                 | (bad-continuation)
+C:122, 0: Line too long (116/100) (line-too-long)
+C:123, 0: Wrong continued indentation (add 34 spaces).
+     groupmembers=db.session.query(User).filter(User.groups.any(groupname=groupname)).all(),
+     ^                                 | (bad-continuation)
+C:124, 0: Wrong continued indentation (add 34 spaces).
+     profile_group=profile_group))
+     ^                                 | (bad-continuation)
+C:125, 0: Exactly one space required after comma
+    resp.headers.add('Cache-Control','no-store,no-cache,must-revalidate,post-check=0,pre-check=0')
+                                    ^ (bad-whitespace)
+C:176, 0: Exactly one space required around assignment
+        groupevents=db.session.query(Event).filter_by(group_id=profile_group.id).all()
+                   ^ (bad-whitespace)
+C:179, 0: Line too long (142/100) (line-too-long)
+C:201, 0: Line too long (107/100) (line-too-long)
+C:202, 0: Line too long (126/100) (line-too-long)
+C:  1, 0: Missing module docstring (missing-docstring)
+W:  7, 0: Wildcard import project.models (wildcard-import)
+C: 12, 0: Invalid constant name "groups_blueprint" (invalid-name)
+C: 18, 0: Invalid argument name "f" (invalid-name)
+C: 18, 0: Missing function docstring (missing-docstring)
+C: 20, 4: Missing function docstring (missing-docstring)
+C: 29, 0: Missing function docstring (missing-docstring)
+E: 32,17: Instance of 'scoped_session' has no 'query' member (no-member)
+C: 41, 0: Missing function docstring (missing-docstring)
+W: 44, 4: String statement has no effect (pointless-string-statement)
+E: 53,13: Class 'Group' has no 'query' member (no-member)
+E: 59,12: Instance of 'scoped_session' has no 'add' member (no-member)
+E: 60,12: Instance of 'scoped_session' has no 'commit' member (no-member)
+C: 83, 0: Missing function docstring (missing-docstring)
+W: 86, 4: String statement has no effect (pointless-string-statement)
+E: 88,62: Instance of 'scoped_session' has no 'query' member (no-member)
+E:102,65: Instance of 'scoped_session' has no 'query' member (no-member)
+C:113, 0: Missing function docstring (missing-docstring)
+W:117, 4: String statement has no effect (pointless-string-statement)
+E:118,20: Instance of 'scoped_session' has no 'query' member (no-member)
+E:122,17: Instance of 'scoped_session' has no 'query' member (no-member)
+E:123,18: Instance of 'scoped_session' has no 'query' member (no-member)
+E:123,48: Class 'User' has no 'groups' member (no-member)
+C:130, 0: Missing function docstring (missing-docstring)
+E:133,12: Instance of 'scoped_session' has no 'query' member (no-member)
+E:134,11: Instance of 'scoped_session' has no 'query' member (no-member)
+E:138,15: Instance of 'scoped_session' has no 'query' member (no-member)
+E:142,20: Instance of 'scoped_session' has no 'query' member (no-member)
+E:147,16: Instance of 'scoped_session' has no 'commit' member (no-member)
+C:153, 0: Missing function docstring (missing-docstring)
+E:154,12: Instance of 'scoped_session' has no 'query' member (no-member)
+E:155,11: Instance of 'scoped_session' has no 'query' member (no-member)
+E:160, 8: Instance of 'scoped_session' has no 'add' member (no-member)
+E:161, 8: Instance of 'scoped_session' has no 'commit' member (no-member)
+C:167, 0: Missing function docstring (missing-docstring)
+E:168,12: Instance of 'scoped_session' has no 'query' member (no-member)
+E:169,11: Instance of 'scoped_session' has no 'query' member (no-member)
+E:173,24: Instance of 'scoped_session' has no 'query' member (no-member)
+E:176,20: Instance of 'scoped_session' has no 'query' member (no-member)
+W:  2, 0: Unused datetime imported from datetime (unused-import)
+W:  3, 0: Unused Flask imported from flask (unused-import)
+W:  3, 0: Unused _app_ctx_stack imported from flask (unused-import)
+W:  5, 0: Unused Bootstrap imported from flask_bootstrap (unused-import)
+W:  7, 0: Unused import relationship from wildcard import (unused-wildcard-import)
+W:  7, 0: Unused import ForeignKey from wildcard import (unused-wildcard-import)
+W:  7, 0: Unused import memberships from wildcard import (unused-wildcard-import)
+W:  7, 0: Unused import Message from wildcard import (unused-wildcard-import)
+C:  5, 0: external import "from flask_bootstrap import Bootstrap" comes before "from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash, _app_ctx_stack, Response, Blueprint, make_response" (wrong-import-order)
+C:  9, 0: standard import "from functools import wraps" comes before "from flask_bootstrap import Bootstrap" (wrong-import-order)
+
+
+Report
+======
+105 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |NC         |NC         |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |0      |NC         |NC         |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|method   |0      |NC         |NC         |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|function |10     |NC         |NC         |10.00       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+External dependencies
+---------------------
+::
+
+    flask (project.groups.views)
+    flask_bootstrap (project.groups.views)
+    project (project.groups.views)
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |139    |59.91 |NC       |NC         |
++----------+-------+------+---------+-----------+
+|docstring |2      |0.86  |NC       |NC         |
++----------+-------+------+---------+-----------+
+|comment   |71     |30.60 |NC       |NC         |
++----------+-------+------+---------+-----------+
+|empty     |20     |8.62  |NC       |NC         |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |NC       |NC         |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |NC       |NC         |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |33     |NC       |NC         |
++-----------+-------+---------+-----------+
+|refactor   |0      |NC       |NC         |
++-----------+-------+---------+-----------+
+|warning    |12     |NC       |NC         |
++-----------+-------+---------+-----------+
+|error      |23     |NC       |NC         |
++-----------+-------+---------+-----------+
+
+
+
+% errors / warnings by module
+-----------------------------
+
++---------------------+-------+--------+---------+-----------+
+|module               |error  |warning |refactor |convention |
++=====================+=======+========+=========+===========+
+|project.groups.views |100.00 |100.00  |0.00     |100.00     |
++---------------------+-------+--------+---------+-----------+
+
+
+
+Messages
+--------
+
++---------------------------+------------+
+|message id                 |occurrences |
++===========================+============+
+|no-member                  |23          |
++---------------------------+------------+
+|missing-docstring          |10          |
++---------------------------+------------+
+|bad-whitespace             |10          |
++---------------------------+------------+
+|line-too-long              |6           |
++---------------------------+------------+
+|unused-wildcard-import     |4           |
++---------------------------+------------+
+|unused-import              |4           |
++---------------------------+------------+
+|pointless-string-statement |3           |
++---------------------------+------------+
+|bad-continuation           |3           |
++---------------------------+------------+
+|wrong-import-order         |2           |
++---------------------------+------------+
+|invalid-name               |2           |
++---------------------------+------------+
+|wildcard-import            |1           |
++---------------------------+------------+
+|fatal                      |1           |
++---------------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at -5.24/10
+
