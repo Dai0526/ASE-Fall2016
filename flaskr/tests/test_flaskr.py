@@ -2,7 +2,7 @@
 import os
 import tempfile
 import pytest
-from flaskr import flaskr.py
+from flaskr import flaskr
 
 
 @pytest.fixture
