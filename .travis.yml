@@ -3,6 +3,6 @@ python:
   - "2.7"
 # command to install dependencies
 install:
-  - pip install -r requirements.txt
+  - pip install -r ./groupwise-2.0/requirements.txt
 # command to run tests
 script: python ./groupwise-2.0/run.py
