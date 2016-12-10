@@ -4,7 +4,6 @@ from flask_testing import TestCase
 import pytest
 from group import app, db
 from project.models import *
-from group import config
 
 class GroupTestCase(TestCase):
     def create_app(self):
