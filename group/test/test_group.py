@@ -2,7 +2,7 @@ import os
 import unittest
 from flask_testing import TestCase
 import pytest
-from project import app, db
+from group import app, db
 from project.models import *
 from group import config
 
