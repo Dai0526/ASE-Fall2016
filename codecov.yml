@@ -1,0 +1,13 @@
+comment:
+  layout: "header, diff"
+  behavior: default
+  require_changes: no
+
+coverage:
+  ignore:
+    - "click/*"
+    - "flask/*"
+    - "jinja2/*"
+    - "markupsafe/*"
+    - "werkzeug/*"
+    - " itsdangerous.py"
