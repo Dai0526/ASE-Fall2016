@@ -4,5 +4,10 @@ python:
 # command to install dependencies
 install:
   - pip install -r ./groupwise-2.0/requirements.txt
+  - pip install codecov
 # command to run tests
-script: py.test ./groupwise-2.0/test_group.py
+script:
+  - py.test ./groupwise-2.0/test_group.py
+  - coverage run ./groupwise-2.0/test_group.py
+after_success:
+  - codecov
