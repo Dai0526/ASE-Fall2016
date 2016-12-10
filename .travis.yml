@@ -6,4 +6,4 @@ python:
 install:
   - pip install -r ./groupwise-2.0/requirements.txt
 # command to run tests
-script: py.test ./groupwise-2.0/*
+script: py.test ./groupwise-2.0/app.py
