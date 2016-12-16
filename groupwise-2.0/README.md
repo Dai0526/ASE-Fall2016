@@ -3,7 +3,7 @@
 ## ASE class
 
 ### Website
-http://40.121.163.9:5000/
+http://40.87.56.115:5000/
 
 ### Install libraries
 ```
